@@ -1,0 +1,16 @@
+.header-icons {
+  display: flex;
+  gap: 1rem
+}
+
+.header-icons a {
+  padding: 0.625rem;
+  border-radius: 1.5rem;
+  background: white;
+  transition: all 0.3s ease-in-out;
+
+}
+
+.header-icons a:hover {
+  background: radial-gradient(circle, rgba(192, 185, 192, 0.608) 35%, transparent);
+}

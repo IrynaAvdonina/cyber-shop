@@ -1,0 +1,46 @@
+.category-banner {
+  display: flex;
+  padding: 3.125rem 10rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.category-banner h2 {
+  font-size: 1.5rem;
+}
+
+.category-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 12rem;
+  padding: 1rem;
+}
+
+.category-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-item img {
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.category-item p {
+  font-size: 1.1rem;
+}

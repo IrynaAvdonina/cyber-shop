@@ -1,0 +1,58 @@
+.categories-content {
+  display: flex;
+}
+
+.categories-filter {
+  padding: 1.25rem;
+  margin-left: 3rem;
+  flex: 1;
+}
+
+.categories-filter p {
+  font-size: 1.1rem;
+}
+
+.categoried-products {
+  margin-right: 7.5rem;
+  flex: 3;
+}
+
+.categoried-products h3 {
+  margin: 2rem 2rem 1rem;
+}
+
+.categories-items {
+  display: flex;
+  padding: 1.875rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.categories-items li {
+  padding: 0.5rem;
+  list-style: none;
+}
+
+.btn-category {
+  background-color: transparent;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+}
+
+.btn-category:hover {
+  background-color: #e0e0e0;
+  border: none;
+}
+
+.selected {
+  font-weight: 600;
+  color: #1789b6;
+  border: none;
+  cursor: pointer;
+}

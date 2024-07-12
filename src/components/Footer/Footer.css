@@ -1,0 +1,9 @@
+footer {
+  display: flex;
+  padding: 2.5rem 2rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(200, 200, 200);
+  gap: 1.25rem;
+}
