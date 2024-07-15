@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-
 import { useParams } from 'react-router-dom';
 import { Product, ProductContent } from '../../components/ProductContent/ProductContent';
 import { Header } from '../../components/Header/Header';
@@ -49,7 +48,6 @@ export const ProductPage = () =>
           sku={product.sku}
           weight={product.weight}
           images={product.images}
-
         />
       )}
       <Footer />

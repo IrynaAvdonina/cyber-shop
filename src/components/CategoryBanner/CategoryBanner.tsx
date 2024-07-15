@@ -4,7 +4,8 @@ import categoryLaptops from '../../assets/category-laptops.png';
 import categoryCameras from '../../assets/category-cameras.png';
 import categorySmWatches from '../../assets/category-smart-watches.png';
 import categoryHeadphones from '../../assets/category-headphones.png';
-import './CategoryBanner.css';
+
+import styled from '@emotion/styled';
 
 // TODO: брати категорії з сервера
 // const categories = [
@@ -39,6 +40,49 @@ import './CategoryBanner.css';
 //   },
 // ];
 
+const CategoryBannerContainer = styled.div`
+  display: flex;
+  padding: 3.125rem 10rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  h2 {
+  font-size: 1.5rem;
+}
+`;
+
+const CategoryList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+`;
+
+const CategoryItem = styled.a`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 12rem;
+  padding: 1rem;
+  &:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  img {
+  height: auto;
+  margin-bottom: 1rem;
+  }
+  p {
+    font-size: 1rem;
+  }
+`;
+
 export const CategoryBanner = () =>
 {
   const [categories, setCategories] = useState<string[] | []>([]);
@@ -49,7 +93,6 @@ export const CategoryBanner = () =>
     {
       const responseProducts = await fetch(`https://dummyjson.com/products/category-list`);
       const categoriesList: string[] = await responseProducts.json();
-      console.log(categoriesList)
       setCategories(categoriesList.slice(0, 5));
     };
 
@@ -58,15 +101,15 @@ export const CategoryBanner = () =>
 
 
   return (
-    <div className="category-banner">
+    <CategoryBannerContainer>
       <h2>Шукати за категорією</h2>
-      <div className="category-list">
+      <CategoryList>
         {categories.map(category => (
-          <a className="category-item" key={category} href={`/category/${category}`}>
+          <CategoryItem key={category} href={`/category/${category}`}>
             <img src={categorySmartphones} alt={category} />
             <p>{category}</p>
-          </a>
+          </CategoryItem>
         ))}
-      </div>
-    </div>)
+      </CategoryList>
+    </CategoryBannerContainer>)
 };

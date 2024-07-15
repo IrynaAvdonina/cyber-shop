@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import './HomePage.css'
+import styled from '@emotion/styled';
+
 import { Header } from '../../components/Header/Header';
 import { MainBanner } from '../../components/MainBanner/MainBanner';
 import { CategoryBanner } from '../../components/CategoryBanner/CategoryBanner';
 import ProductCardList from '../../components/ProductCardList/ProductCardList';
 import { Footer } from '../../components/Footer/Footer';
 import { TProductCard } from '../../components/ProductCard/ProductCard';
+
+const NewProductBanner = styled.div`
+  display: flex;
+  padding: 1.5rem 10rem;
+  flex-direction: column;
+  h2 {
+    font-size: 1.5rem;
+  } 
+`;
+
 
 export function HomePage()
 {
@@ -37,10 +48,10 @@ export function HomePage()
       <Header />
       <MainBanner />
       <CategoryBanner />
-      <div className="new-product-banner">
+      <NewProductBanner>
         <h2>Новинки</h2>
         <ProductCardList products={products} />
-      </div>
+      </NewProductBanner>
       <Footer />
     </>
   )

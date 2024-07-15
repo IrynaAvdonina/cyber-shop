@@ -1,11 +1,67 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { transliterate } from 'transliteration';
-import { Header } from '../../components/Header/Header'
-import { Footer } from '../../components/Footer/Footer'
-import ProductCardList from '../../components/ProductCardList/ProductCardList'
+import styled from '@emotion/styled';
+
+import { Header } from '../../components/Header/Header';
+import { Footer } from '../../components/Footer/Footer';
+import ProductCardList from '../../components/ProductCardList/ProductCardList';
 import { TProductCard } from '../../components/ProductCard/ProductCard';
-import './CategoryPage.css'
+
+const CategoriesContent = styled.div`
+  display: flex;
+`;
+
+const CategoriesFilter = styled.div`
+padding: 1.25rem;
+  margin-left: 3rem;
+  flex: 1;
+  p {
+    font-size: 1.1rem;
+  } 
+`;
+
+const CategoriesItems = styled.ul`
+  display: flex;
+  padding: 1.875rem;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  li {
+    padding: 0.5rem;
+    list-style: none;
+  }
+`;
+
+const CategoryFilterBtn = styled.button<{ selected?: boolean }>`
+  background-color: transparent;
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  ${({ selected }) =>
+    selected &&
+    `
+    font-weight: 600;
+    color: #8685EF;
+  `}
+`;
+
+const CategoriedProducts = styled.div`
+  margin-right: 7.5rem;
+  flex: 3;
+  h3 {
+    margin: 2rem 2rem 1rem;
+  }
+`;
 
 export const CategoryPage = () =>
 {
@@ -71,28 +127,30 @@ export const CategoryPage = () =>
   return (
     <>
       <Header />
-      <div className='categories-content'>
-        <div className='categories-filter'>
+      <CategoriesContent>
+        <CategoriesFilter>
           <p>Виберіть категорію товарів:</p>
-          <ul className='categories-items'>
+          <CategoriesItems>
             {categories.map((category, index) => (
               <li key={index}>
-                <button
-                  className={`btn-category ${category === selectedCategory ? 'selected' : ''}`}
+                <CategoryFilterBtn
+                  // className={`btn-category ${category === selectedCategory ? 'selected' : ''}`}
+                  selected={category === selectedCategory}
+
                   onClick={() => handleCategoryChange(category)}>
                   {category}
-                </button>
+                </CategoryFilterBtn>
               </li>
             ))}
-          </ul>
-        </div>
-        <div className='categoried-products'>
+          </CategoriesItems>
+        </CategoriesFilter>
+        <CategoriedProducts>
           <h3>{selectedCategory}</h3>
 
           <ProductCardList products={products} />
 
-        </div>
-      </div>
+        </CategoriedProducts>
+      </CategoriesContent>
       <Footer />
     </>
   )

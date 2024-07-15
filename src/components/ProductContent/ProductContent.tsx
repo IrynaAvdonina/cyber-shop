@@ -1,5 +1,70 @@
 import React from 'react';
-import './ProductContent.css'
+import styled from '@emotion/styled';
+
+const ProductContentContainer = styled.div`
+  padding: 1.5rem 4.5rem;
+  display: flex;
+  justify-content: space-evenly;
+  .img-container {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    width: 50%;
+  }
+`;
+
+const ProductInfo = styled.div`
+  background-color: #f2f2f2;
+  padding: 1.25rem;
+  border-radius: 10px;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  a {
+    color: #5e5fb5;
+    font-size: 1.1rem;
+    text-decoration: none;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  p {
+    margin: 1rem 0;
+    font-size: 1.1em;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+    color: #333;
+  }
+
+  .product-price {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  .product-description {
+    margin: 1.5rem;
+    width: 70%;
+    text-align: center;
+  }
+
+  p span {
+    font-weight: 600;
+    margin-right: 0.8rem;
+  }
+  button{
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  }
+`;
 
 export type Product = {
   id: number,
@@ -22,12 +87,12 @@ export type Product = {
 export const ProductContent = ({ id, title, price, category, description, dimensions, stock, brand, sku, weight, images, thumbnail }: Product) =>
 {
   return (
-    <div className="product-content">
+    <ProductContentContainer>
       <div className="img-container">
         <img src={images[0]} alt={title + ' ' + id} />
       </div>
 
-      <div className='product-info'>
+      <ProductInfo>
         <a className='product-category' href="/category/">{category}</a>
         <h2 className='product-name'>{title}</h2>
         <p className='product-price'>{price} грн.</p>
@@ -35,8 +100,8 @@ export const ProductContent = ({ id, title, price, category, description, dimens
         <p className='product-dimensions'><span>Розміри: </span> {dimensions.height} × {dimensions.width} × {dimensions.depth}</p>
         <p className='product-weight'><span>Вага: </span>{weight} г.</p>
         <button className="add-to-cart-button">Додати в кошик</button>
-      </div>
-    </div>
+      </ProductInfo>
+    </ProductContentContainer>
   )
 }
 
