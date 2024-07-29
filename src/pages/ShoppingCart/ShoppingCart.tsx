@@ -12,13 +12,33 @@ const ShoppingCartContainer = styled.div`
   width: 60%;
   padding: 0 3.25rem 3.25rem;
   h2 {
-    padding: 1rem;
+    padding: 1.5rem;
     font-size: 1.8rem;
     text-align: center;
     margin: 0.5rem;
+    color: #333333;
   }
   .cart-items {
     margin: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 1.5rem 1.5rem;
+    width: 70%;
+
+    h2{
+      font-size: 1.5rem;
+    }
+    .cart-items {
+      margin: auto;
+      width: 60%;
+    }
+  }
+  @media (max-width: 475px){
+    margin: auto;
+    .cart-items {
+      width: 90%;
+    }
   }
 `;
 
@@ -29,6 +49,7 @@ const CartPrice = styled.div`
     text-align: center;
     font-size: 1.1rem;
     transition: all 0.5s ease-in-out;
+    background-color: #53e04cad;
     &:hover {
       transform: translateY(-0.25em);
       box-shadow: 0 0 0.5em 0 #5e5e5e;
@@ -43,7 +64,13 @@ const TotalPricePrgrph = styled.p`
     margin-left: 0.5rem;
     font-weight: 600;
     font-size: 1.3rem;
+    @media (max-width: 475px) {
+      font-size:1.1rem;
+    }
   }
+  @media (max-width: 475px) {
+      font-size:1rem;
+    }
 `;
 
 // TODO: взяти з серверу
@@ -86,11 +113,10 @@ export const ShoppingCart = () =>
               <CartItems key={item.id} product={item} />
             ))}
           </div>
-
         )}
         <CartPrice>
-          <TotalPricePrgrph>Загальна сума:<span> {priceItems.toFixed(2)} грн.</span></TotalPricePrgrph>
-          <button>Оформити замовлення</button>
+          <TotalPricePrgrph>Загальна сума:<span> {priceItems.toFixed(2)}&nbsp;грн.</span></TotalPricePrgrph>
+          <button>Оформити</button>
         </CartPrice>
       </ShoppingCartContainer>
       <Footer />

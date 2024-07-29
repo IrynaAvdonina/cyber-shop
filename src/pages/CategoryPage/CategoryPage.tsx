@@ -10,15 +10,26 @@ import { TProductCard } from '../../components/ProductCard/ProductCard';
 
 const CategoriesContent = styled.div`
   display: flex;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    text-align: center;
+  }
 `;
 
 const CategoriesFilter = styled.div`
-padding: 1.25rem;
+  padding: 1.25rem;
   margin-left: 3rem;
   flex: 1;
+
   p {
     font-size: 1.1rem;
   } 
+  @media (max-width: 768px) {
+    margin-left: 0;
+    p {
+    font-size: 0.95rem;
+    } 
+  }
 `;
 
 const CategoriesItems = styled.ul`
@@ -31,6 +42,12 @@ const CategoriesItems = styled.ul`
     padding: 0.5rem;
     list-style: none;
   }
+  @media (max-width: 768px) {
+    padding: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 `;
 
 const CategoryFilterBtn = styled.button<{ selected?: boolean }>`
@@ -42,6 +59,8 @@ const CategoryFilterBtn = styled.button<{ selected?: boolean }>`
   text-align: left;
   transition: background-color 0.3s ease;
   border-radius: 5px;
+  
+  border-bottom: 2px #8685EF solid;
 
   &:hover {
     background-color: #e0e0e0;
@@ -56,10 +75,14 @@ const CategoryFilterBtn = styled.button<{ selected?: boolean }>`
 `;
 
 const CategoriedProducts = styled.div`
-  margin-right: 7.5rem;
+  margin-right: 8%;
   flex: 3;
   h3 {
     margin: 2rem 2rem 1rem;
+  }
+  @media (max-width: 768px) {
+    margin-right: 0;
+    justify-content: space-evenly
   }
 `;
 
@@ -145,8 +168,8 @@ export const CategoryPage = () =>
           </CategoriesItems>
         </CategoriesFilter>
         <CategoriedProducts>
-          <h3>{selectedCategory}</h3>
-
+          {selectedCategory ? (
+            <h3>{selectedCategory}</h3>) : null}
           <ProductCardList products={products} />
 
         </CategoriedProducts>

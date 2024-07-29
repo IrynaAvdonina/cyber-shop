@@ -2,14 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { AppRout } from './AppRout'
 import { Global, css } from '@emotion/react';
-// 
-// import './index.css'
 
 const globalStyle = css`
   :root {
     font-family: Inter, system-ui, sans-serif;
-    /* font-weight: 400; */
-    color: #213547;
+    /* font-weight: 400; 
+    color: #213547;*/
     background-color: #ffffff;
   }
 

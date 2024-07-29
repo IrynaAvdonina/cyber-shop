@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import cartIcon from './../../../assets/cart.png';
 import accountIcon from './../../../assets/user.png';
 import styled from '@emotion/styled';
@@ -14,16 +14,22 @@ const HeaderIconsContainer = styled.div`
     &:hover{
       background: radial-gradient(circle, rgba(192, 185, 192, 0.608) 35%, transparent);
     }
+    img{
+      width: 2rem;
+    }
+  }
+  @media (max-width: 768px) {
+    order: 2;
   }
 `;
 
 export const HeaderIcons = () => (
   <HeaderIconsContainer>
-    <a href="/shoppingCart">
-      <img src={cartIcon} alt="Shopping Cart" />
+    <a href="/shoppingCart" aria-label="Go to Shopping Cart">
+      <img src={cartIcon} alt="Shopping Cart icon" />
     </a>
-    <a href="/account">
-      <img src={accountIcon} alt="My Account" />
+    <a href="/account" aria-label="Go to My Account">
+      <img src={accountIcon} alt="My Account icon" />
     </a>
   </HeaderIconsContainer>
 );

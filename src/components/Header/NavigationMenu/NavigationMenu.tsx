@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const NavMenu = styled.nav` 
+const NavMenu = styled.nav`
   ul {
     display: flex;
     list-style-type: none;
+    padding-left: 0;
+    gap: 1rem;
   }
 
   li {
@@ -13,10 +15,10 @@ const NavMenu = styled.nav`
 
   a {
     color: black;
-    padding: 0.875rem 1rem;
     font-size: 1rem;
     text-decoration: none;
     position: relative;
+    padding-bottom: 0.5rem;
     &::before {
       content: '';
       position: absolute;
@@ -34,6 +36,12 @@ const NavMenu = styled.nav`
       transform: scaleX(1);
     }
   }
+  @media (max-width: 768px) {
+      order: 3;
+      li{
+        margin: 0 0.8rem;
+      }
+    }
 `;
 
 
@@ -42,8 +50,8 @@ export const NavigationMenu = () =>
   return (
     <NavMenu>
       <ul >
-        <li><a href="/">Головна</a></li>
-        <li><a href="/categories">Категорії</a></li>
+        <li><a href="/" aria-label="Go to Main Page">Головна</a></li>
+        <li><a href="/categories" aria-label="Go to Category Page">Категорії</a></li>
       </ul>
     </NavMenu>
   );

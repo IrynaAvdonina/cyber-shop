@@ -6,6 +6,10 @@ import logoImage from '../../assets/logo.svg';
 const LogoContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 1rem;
+  @media (max-width: 768px) {
+    order: 1;
+  }
 `;
 
 const LogoImage = styled.img`

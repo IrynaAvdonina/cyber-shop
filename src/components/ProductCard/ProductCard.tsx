@@ -2,32 +2,35 @@ import React from 'react';
 import styled from '@emotion/styled';
 
 const ProductCardContainer = styled.div`
+  display: flex;
   justify-content: space-between;
+  flex-direction: column;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   text-align: center;
   padding: 0.5rem 1rem;
 
-.product-card-name {
-  text-decoration: none;
-  color: black;
-}
-.img-container {
-  width: 100%;
-}
-img {
-  width: 100%;
-  object-fit: contain;
-  height: 100%;
-}
-button{
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.9rem;
+  .product-card-name {
+    text-decoration: none;
+    color: black;
+  }
+  .img-container {
+    width: 80%;
+  }
+  img {
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
+  }
+  button{
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    &:hover {
+      transform: translateY(-0.25em);
+    }
   }
 `;
 
