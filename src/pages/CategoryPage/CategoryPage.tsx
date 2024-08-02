@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { transliterate } from 'transliteration';
 import styled from '@emotion/styled';
 
@@ -85,60 +85,72 @@ const CategoriedProducts = styled.div`
     justify-content: space-evenly
   }
 `;
+const fetchData = async (url: string) =>
+{
+  try
+  {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error)
+  {
+    console.error('Error fetching data:', error);
+    return null;
+  }
+};
 
 export const CategoryPage = () =>
 {
-  const [categories, setCategories] = useState<string[] | []>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string | ''>('');
+  const [categories, setCategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
   const { categoryParam } = useParams();
+  const { search } = useLocation();
   const [products, setProducts] = useState<TProductCard[]>([]);
 
   const navigate = useNavigate();
 
   useEffect(() =>
   {
-    const fetchData = async () =>
+    const fetchCategories = async () =>
     {
-      try
+      const dataCategories = await fetchData('https://dummyjson.com/products/category-list');
+      if (dataCategories)
       {
-        const responseCategories = await fetch('https://dummyjson.com/products/category-list');
-        const dataCategories = await responseCategories.json();
-
         setCategories(dataCategories);
-
-        if (categoryParam)
-        {
-          const decodedCategory = categoryParam.replace(/_/g, ' ');
-          console.log(decodedCategory)
-          //!! прибрати ! в category!
-          // const filteredProducts = data.products.filter((product: TProductCard) => transliterate(product.category!).toLowerCase() === decodedCategory.toLowerCase());
-
-          const responseProducts = await fetch(`https://dummyjson.com/products/category/${decodedCategory}`);
-          const filteredProducts = await responseProducts.json();
-
-          setProducts(filteredProducts.products);
-        }
-        else
-        {
-          const responseProducts = await fetch('https://dummyjson.com/products');
-          const data = await responseProducts.json();
-
-          setProducts(data.products);
-        }
-
-      } catch (error)
-      {
-        console.error('Error fetching data:', error);
       }
     };
 
-    fetchData();
-  }, [categoryParam]);
+    fetchCategories();
+  }, []);
 
   useEffect(() =>
   {
-    console.log('Filtered Products:', products);
-  }, [products]);
+    const fetchProducts = async () =>
+    {
+      const queryParams = new URLSearchParams(search);
+      const searchQuery = queryParams.get('search');
+      let url = 'https://dummyjson.com/products';
+
+      if (searchQuery)
+      {
+        url = `https://dummyjson.com/products/search?q=${searchQuery}`;
+        setSelectedCategory('');
+      } else if (categoryParam)
+      {
+        const decodedCategory = categoryParam.replace(/_/g, ' ');
+        url = `https://dummyjson.com/products/category/${decodedCategory}`;
+        setSelectedCategory(decodedCategory);
+      }
+
+      const data = await fetchData(url);
+      if (data)
+      {
+        setProducts(data.products);
+      }
+    };
+
+    fetchProducts();
+  }, [categoryParam, search]);
 
   const handleCategoryChange = (category: string) =>
   {
@@ -157,9 +169,7 @@ export const CategoryPage = () =>
             {categories.map((category, index) => (
               <li key={index}>
                 <CategoryFilterBtn
-                  // className={`btn-category ${category === selectedCategory ? 'selected' : ''}`}
                   selected={category === selectedCategory}
-
                   onClick={() => handleCategoryChange(category)}>
                   {category}
                 </CategoryFilterBtn>
@@ -168,14 +178,11 @@ export const CategoryPage = () =>
           </CategoriesItems>
         </CategoriesFilter>
         <CategoriedProducts>
-          {selectedCategory ? (
-            <h3>{selectedCategory}</h3>) : null}
+          {selectedCategory && <h3>{selectedCategory}</h3>}
           <ProductCardList products={products} />
-
         </CategoriedProducts>
       </CategoriesContent>
       <Footer />
     </>
-  )
-}
-
+  );
+};

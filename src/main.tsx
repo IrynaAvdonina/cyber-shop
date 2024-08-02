@@ -6,8 +6,6 @@ import { Global, css } from '@emotion/react';
 const globalStyle = css`
   :root {
     font-family: Inter, system-ui, sans-serif;
-    /* font-weight: 400; 
-    color: #213547;*/
     background-color: #ffffff;
   }
 
@@ -27,6 +25,9 @@ const globalStyle = css`
     font-size: 1em;
     background-color: #dbdbdb;
     cursor: pointer;
+  }
+  input{
+    font-family: Inter, system-ui, sans-serif;
   }
 `;
 

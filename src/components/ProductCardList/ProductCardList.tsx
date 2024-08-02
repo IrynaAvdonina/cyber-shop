@@ -4,14 +4,14 @@ import { ProductCard, TProductCard } from '../ProductCard/ProductCard';
 
 const ProductListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(11rem, auto));
+  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
   padding: 1rem;
   gap: 2rem;
 
   @media (max-width: 768px) {
-    padding: 0.5rem;
     gap: 1rem;
-    grid-template-columns: repeat(2, minmax(13rem, 16.25rem));
+    justify-content: center;
+    grid-template-columns: repeat(2, minmax(13rem, 17rem));
   }
   @media (max-width: 475px) {
     justify-content: center;

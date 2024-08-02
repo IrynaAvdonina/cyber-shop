@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 
-import cartIcon from './../../../assets/search.svg';
+import searchIcon from './../../../assets/search.svg';
 
 const SearchForm = styled.form`
   .search-icon{
@@ -14,21 +15,24 @@ const SearchForm = styled.form`
     }
   @media (max-width: 768px) {
     order: 4;
+    display: flex;
     .search-icon {
-      display:block;
-      opacity: 1;
+      opacity:1;
+      display: inline;
+      background-color: transparent;
     }
   }
 `;
 
-const SearchInputContainer = styled.div`
+const SearchInputContainer = styled.div<{ showInput: boolean }>`
   display: flex;
   align-items: center;
+  opacity: 1;
   @media (max-width: 768px) {
-    opacity: 0;
-    display: none;
+    opacity: ${({ showInput }) => (showInput ? '1' : '0')};
+    display: ${({ showInput }) => (showInput ? 'flex' : 'none')};
   }
-  `;
+`;
 
 const SearchInput = styled.input`
   min-width: 20vw;
@@ -43,13 +47,13 @@ const SearchInput = styled.input`
     outline: none;
   }
   @media (max-width: 768px) {
-    opacity:0;
     min-width: 50vw;
-    font-size: 0.75rem;
   }
 
   @media (max-width: 480px) {
-    min-width: 70vw;
+    max-width: 35vw;
+    min-width: 10vw;
+    margin-right: 0.5rem;
   }
 `;
 
@@ -62,11 +66,17 @@ const SearchButton = styled.button`
     background-color: #F2ECFF;
     box-shadow: 0 0 5px #727272;
   }
+  @media (max-width: 480px) {
+    padding: 0.5rem 0.75rem;
+  }
 `;
 
 export const SearchField = () =>
 {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string | ''>('');
+  const [showInput, setShowInput] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) =>
   {
@@ -76,17 +86,21 @@ export const SearchField = () =>
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) =>
   {
     event.preventDefault();
-    // Ваш код для обробки пошукового запиту, наприклад, відправка на сервер або локальний пошук
-    console.log(`Виконано пошук: ${searchQuery}`);
+    navigate(`/categories?search=${searchQuery}`);
+  };
+
+  const handleClick = () =>
+  {
+    setShowInput(!showInput);
   };
 
   return (
 
     <SearchForm onSubmit={handleSubmit}>
-      <div className="search-icon">
-        <img src={cartIcon} alt="Shopping Cart" />
-      </div>
-      <SearchInputContainer>
+      <button className="search-icon" type="button" onClick={handleClick}>
+        <img src={searchIcon} alt="Search Icon" />
+      </button>
+      <SearchInputContainer showInput={showInput}>
         <SearchInput
           type="text"
           placeholder="Пошук товарів..."
