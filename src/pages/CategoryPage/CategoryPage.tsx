@@ -7,6 +7,7 @@ import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import ProductCardList from '../../components/ProductCardList/ProductCardList';
 import { TProductCard } from '../../components/ProductCard/ProductCard';
+import { capitalize } from './../../components/CategoryBanner/CategoryBanner';
 
 const CategoriesContent = styled.div`
   display: flex;
@@ -171,14 +172,14 @@ export const CategoryPage = () =>
                 <CategoryFilterBtn
                   selected={category === selectedCategory}
                   onClick={() => handleCategoryChange(category)}>
-                  {category}
+                  {capitalize(category)}
                 </CategoryFilterBtn>
               </li>
             ))}
           </CategoriesItems>
         </CategoriesFilter>
         <CategoriedProducts>
-          {selectedCategory && <h3>{selectedCategory}</h3>}
+          {selectedCategory && <h3>{capitalize(selectedCategory)}</h3>}
           <ProductCardList products={products} />
         </CategoriedProducts>
       </CategoriesContent>

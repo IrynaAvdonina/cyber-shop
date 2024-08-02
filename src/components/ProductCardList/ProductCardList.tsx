@@ -4,7 +4,7 @@ import { ProductCard, TProductCard } from '../ProductCard/ProductCard';
 
 const ProductListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(10rem, auto));
+  grid-template-columns: repeat(auto-fill, minmax(11rem, auto));
   padding: 1rem;
   gap: 2rem;
 

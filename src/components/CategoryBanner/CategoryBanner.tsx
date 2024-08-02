@@ -4,41 +4,17 @@ import categoryLaptops from '../../assets/category-laptops.png';
 import categoryCameras from '../../assets/category-cameras.png';
 import categorySmWatches from '../../assets/category-smart-watches.png';
 import categoryHeadphones from '../../assets/category-headphones.png';
+import unknownCategory from '../../assets/unknown-category_2.svg';
 
 import styled from '@emotion/styled';
 
-// TODO: брати категорії з сервера
-// const categories = [
-//   {
-//     id: 1,
-//     name: 'Смартфони',
-//     image: categorySmartphones,
-//     link: '/categories/smartfoni',
-//   },
-//   {
-//     id: 2,
-//     name: 'Ноутбуки',
-//     image: categoryLaptops,
-//     link: '/categories/noutbuki',
-//   },
-//   {
-//     id: 3,
-//     name: 'Фотоапарати',
-//     image: categoryCameras,
-//     link: '/categories/fototehnika',
-//   },
-//   {
-//     id: 4,
-//     name: 'Smart годинники',
-//     image: categorySmWatches,
-//     link: '/categories/smart-watches',
-//   }, {
-//     id: 5,
-//     name: 'Навушники',
-//     image: categoryHeadphones,
-//     link: '/categories/audiotehnika',
-//   },
-// ];
+const categoryImages: Record<string, string> = {
+  smartphones: categorySmartphones,
+  laptops: categoryLaptops,
+  'mobile-accessories': categoryCameras,//
+  'mens-watches': categorySmWatches,
+  tablets: categoryHeadphones,//
+};
 
 const CategoryBannerContainer = styled.div`
   display: flex;
@@ -110,6 +86,11 @@ const CategoryItem = styled.a`
   }
 `;
 
+export function capitalize(string: string)
+{
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export const CategoryBanner = () =>
 {
   const [categories, setCategories] = useState<string[] | []>([]);
@@ -134,12 +115,12 @@ export const CategoryBanner = () =>
         {categories.length > 0 ? (
           categories.map(category => (
             <CategoryItem key={category} href={`/category/${category}`}>
-              <img src={categorySmartphones} alt={category} />
-              <p>{category}</p>
+              <img src={categoryImages[category] || unknownCategory} alt={category} />
+              <p>{capitalize(category)}</p>
             </CategoryItem>
           ))
         ) : (
-          <p>Loading...</p>
+          <p>Поки категорій немає :(</p>
         )}
       </CategoryList>
     </CategoryBannerContainer>)
