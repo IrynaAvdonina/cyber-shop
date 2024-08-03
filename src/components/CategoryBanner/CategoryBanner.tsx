@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import styled from '@emotion/styled';
+import axios from 'axios';
+
 import categorySmartphones from '../../assets/category-smartphones.png';
 import categoryLaptops from '../../assets/category-laptops.png';
 import categoryCameras from '../../assets/category-cameras.png';
 import categorySmWatches from '../../assets/category-smart-watches.png';
 import categoryHeadphones from '../../assets/category-headphones.png';
 import unknownCategory from '../../assets/unknown-category_2.svg';
-
-import styled from '@emotion/styled';
 
 const categoryImages: Record<string, string> = {
   smartphones: categorySmartphones,
@@ -99,9 +100,15 @@ export const CategoryBanner = () =>
   {
     const fetchCategories = async () =>
     {
-      const responseProducts = await fetch(`https://dummyjson.com/products/category-list`);
-      const categoriesList: string[] = await responseProducts.json();
-      setCategories(categoriesList.slice(0, 5));
+      try
+      {
+        const response = await axios.get('https://dummyjson.com/products/category-list');
+        const categoriesList: string[] = response.data;
+        setCategories(categoriesList.slice(0, 5));
+      } catch (error)
+      {
+        console.error('Error fetching categories:', error);
+      }
     };
 
     fetchCategories();

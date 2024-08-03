@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { transliterate } from 'transliteration';
 import styled from '@emotion/styled';
+import axios from 'axios';
 
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
@@ -90,9 +90,8 @@ const fetchData = async (url: string) =>
 {
   try
   {
-    const response = await fetch(url);
-    const data = await response.json();
-    return data;
+    const response = await axios.get(url);
+    return response.data;
   } catch (error)
   {
     console.error('Error fetching data:', error);
@@ -155,9 +154,15 @@ export const CategoryPage = () =>
 
   const handleCategoryChange = (category: string) =>
   {
-    const transliteratedCategory = transliterate(category, { unknown: '_' });
+    if (selectedCategory === category)
+    {
+      setSelectedCategory('');
+      navigate(`/categories`);
+
+      return;
+    }
     setSelectedCategory(category);
-    navigate(`/category/${transliteratedCategory.toLowerCase()}`);
+    navigate(`/category/${category.toLowerCase()}`);
   };
 
   return (

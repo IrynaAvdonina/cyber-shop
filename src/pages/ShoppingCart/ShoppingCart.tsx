@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import axios from 'axios';
 
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
@@ -85,8 +86,8 @@ export const ShoppingCart = () =>
     {
       try
       {
-        const response = await fetch('https://dummyjson.com/products');
-        const data = await response.json();
+        const response = await axios.get('https://dummyjson.com/products');
+        const data = await response.data;
         const selectedProducts: TProductCard[] = data.products.filter((item: TProductCard) => productsData.includes(item.id));
         setCartItems(selectedProducts);
         const totalPrice = selectedProducts.reduce((total, item) => total + item.price, 0);

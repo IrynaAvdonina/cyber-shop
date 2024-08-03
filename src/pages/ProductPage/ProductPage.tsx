@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import { useParams } from 'react-router-dom';
 import { Product, ProductContent } from '../../components/ProductContent/ProductContent';
@@ -22,8 +23,8 @@ export const ProductPage = () =>
     {
       try
       {
-        const response = await fetch(`https://dummyjson.com/products/${id}`);
-        const selectedProduct = await response.json();
+        const response = await axios.get(`https://dummyjson.com/products/${id}`);
+        const selectedProduct = await response.data;
         setProduct(selectedProduct);
       } catch (error)
       {

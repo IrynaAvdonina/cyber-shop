@@ -2,6 +2,8 @@ import React from 'react'
 import bannerImage from '../../assets/banner-image.png';
 import styled from '@emotion/styled';
 
+const mainBannerProductId = 123;
+
 const MainBannerContainer = styled.div`
   display: flex;
   padding: 2.5rem 8rem 0;
@@ -83,9 +85,9 @@ const LinkToBuy = styled.a`
 export const MainBanner = () => (
   <MainBannerContainer>
     <BannerContent>
-      <h1>IPhone 15 Pro</h1>
+      <h1>IPhone 13 Pro</h1>
       <p>Створений, щоб змінити все на краще. Для кожного.</p>
-      <LinkToBuy href="/products/2">Купити</LinkToBuy>
+      <LinkToBuy href={`/products/${mainBannerProductId}`}>Купити</LinkToBuy>
     </BannerContent>
   </MainBannerContainer>
 );

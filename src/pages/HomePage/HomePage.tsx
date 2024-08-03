@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
+import axios from 'axios';
 
 import { Header } from '../../components/Header/Header';
 import { MainBanner } from '../../components/MainBanner/MainBanner';
@@ -36,10 +37,8 @@ export function HomePage()
       try
       {
         // TODO: зробити одне підключення і брати інфу звідти
-        const response = await fetch('https://dummyjson.com/products?skip=10');
-        const data = await response.json();
-        console.log(data);
-        const topProducts = data.products.slice(0, 9);
+        const response = await axios.get('https://dummyjson.com/products?skip=10');
+        const topProducts = response.data.products.slice(0, 9);
         setProducts(topProducts);
       } catch (error)
       {
