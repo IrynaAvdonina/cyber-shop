@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
-import axios from 'axios';
 
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import ProductCardList from '../../components/ProductCardList/ProductCardList';
 import { TProductCard } from '../../components/ProductCard/ProductCard';
 import { capitalize } from './../../components/CategoryBanner/CategoryBanner';
+import { fetchCategories, fetchProductsByUrl } from './../../apiService';
+
 
 const CategoriesContent = styled.div`
   display: flex;
@@ -86,18 +87,6 @@ const CategoriedProducts = styled.div`
     justify-content: space-evenly
   }
 `;
-const fetchData = async (url: string) =>
-{
-  try
-  {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error)
-  {
-    console.error('Error fetching data:', error);
-    return null;
-  }
-};
 
 export const CategoryPage = () =>
 {
@@ -111,16 +100,16 @@ export const CategoryPage = () =>
 
   useEffect(() =>
   {
-    const fetchCategories = async () =>
+    const fetchAllCategories = async () =>
     {
-      const dataCategories = await fetchData('https://dummyjson.com/products/category-list');
+      const dataCategories: string[] = await fetchCategories();
       if (dataCategories)
       {
         setCategories(dataCategories);
       }
     };
 
-    fetchCategories();
+    fetchAllCategories();
   }, []);
 
   useEffect(() =>
@@ -129,7 +118,7 @@ export const CategoryPage = () =>
     {
       const queryParams = new URLSearchParams(search);
       const searchQuery = queryParams.get('search');
-      let url = 'https://dummyjson.com/products';
+      let url = 'https://dummyjson.com/products?limit=0';
 
       if (searchQuery)
       {
@@ -142,11 +131,8 @@ export const CategoryPage = () =>
         setSelectedCategory(decodedCategory);
       }
 
-      const data = await fetchData(url);
-      if (data)
-      {
-        setProducts(data.products);
-      }
+      let productsByUrl = await fetchProductsByUrl(url);
+      setProducts(productsByUrl);
     };
 
     fetchProducts();

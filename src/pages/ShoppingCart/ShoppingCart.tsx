@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import axios from 'axios';
 
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import { CartItems } from '../../components/CartItems/CartItems';
 import { TProductCard } from '../../components/ProductCard/ProductCard';
+import { fetchProducts } from '../../apiService';
 
 const ShoppingCartContainer = styled.div`
   margin: auto;
@@ -74,7 +74,7 @@ const TotalPricePrgrph = styled.p`
 `;
 
 // TODO: взяти з серверу
-const productsData = [2, 5, 13, 10];
+const productsData = [78, 98, 100, 105];
 
 export const ShoppingCart = () =>
 {
@@ -82,13 +82,12 @@ export const ShoppingCart = () =>
   const [priceItems, setPriceItems] = useState(0);
   useEffect(() =>
   {
-    const fetchData = async () =>
+    const fetchAllProducts = async () =>
     {
       try
       {
-        const response = await axios.get('https://dummyjson.com/products');
-        const data = await response.data;
-        const selectedProducts: TProductCard[] = data.products.filter((item: TProductCard) => productsData.includes(item.id));
+        const allProducts = await fetchProducts();
+        const selectedProducts: TProductCard[] = allProducts.filter((item: TProductCard) => productsData.includes(item.id));
         setCartItems(selectedProducts);
         const totalPrice = selectedProducts.reduce((total, item) => total + item.price, 0);
         setPriceItems(totalPrice);
@@ -97,7 +96,7 @@ export const ShoppingCart = () =>
         console.error('Error fetching product data:', error);
       }
     };
-    fetchData();
+    fetchAllProducts();
   }, []);
 
   return (

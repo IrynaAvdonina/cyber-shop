@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-
 import { useParams } from 'react-router-dom';
+
 import { Product, ProductContent } from '../../components/ProductContent/ProductContent';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
+import { fetchProduct } from './../../apiService';
 
 export const ProductPage = () =>
 {
@@ -19,19 +19,18 @@ export const ProductPage = () =>
 
   useEffect(() =>
   {
-    const fetchData = async () =>
+    const fetchSelectedProduct = async () =>
     {
       try
       {
-        const response = await axios.get(`https://dummyjson.com/products/${id}`);
-        const selectedProduct = await response.data;
+        const selectedProduct: Product = await fetchProduct(id);
         setProduct(selectedProduct);
       } catch (error)
       {
         console.error('Error fetching product data:', error);
       }
     };
-    fetchData();
+    fetchSelectedProduct();
   }, [productId]);
   return (
     <>
