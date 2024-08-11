@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import categorySmartphones from '../../assets/category-smartphones.png';
 import categoryLaptops from '../../assets/category-laptops.png';
-import categoryCameras from '../../assets/category-cameras.png';
+import categoryMobAcs from '../../assets/category-mobacs.png';
 import categorySmWatches from '../../assets/category-smart-watches.png';
 import categoryHeadphones from '../../assets/category-headphones.png';
 import unknownCategory from '../../assets/unknown-category_2.svg';
@@ -13,7 +13,7 @@ import { fetchCategories } from './../../apiService';
 const categoryImages: Record<string, string> = {
   smartphones: categorySmartphones,
   laptops: categoryLaptops,
-  'mobile-accessories': categoryCameras,//
+  'mobile-accessories': categoryMobAcs,
   'mens-watches': categorySmWatches,
   tablets: categoryHeadphones,//
 };
@@ -69,6 +69,7 @@ const CategoryItem = styled.a`
   img {
     height: auto;
     margin-bottom: 1rem;
+    width: 4rem;
   }
   p {
     font-size: 1rem;
