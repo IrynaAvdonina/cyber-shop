@@ -35,12 +35,11 @@ Categories page
 
 ## 📦 Features
 
-- можливість створення облікового запису
-- зручна навігація по категоріям товарів
-- можливість швидкого та точного пошуку продуктів
-- інформативні сторінки для кожного товару
-- можливість додавання товарів до кошика
-- перегляд та редагування вмісту кошика
+- convenient navigation by product categories
+- the ability to quickly and accurately search for products
+- informative pages for each product
+- the possibility of adding goods to the basket
+- view and edit the contents of the shopping cart
 
 
 
