@@ -1,4 +1,4 @@
-# togethere
+# Cyber
 
 [![repo-top-language](https://img.shields.io/github/languages/top/IrynaAvdonina/cyber-shop?style=flat&color=0080ff)]()
 [![last-commit](https://img.shields.io/github/last-commit/IrynaAvdonina/cyber-shop?style=flat&logo=git&logoColor=white&color=0080ff)]()
