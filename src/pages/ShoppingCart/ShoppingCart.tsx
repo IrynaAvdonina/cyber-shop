@@ -79,7 +79,7 @@ const productsData = [78, 98, 100, 105];
 export const ShoppingCart = () =>
 {
   const [cartItems, setCartItems] = useState<TProductCard[] | []>([]);
-  const [priceItems, setPriceItems] = useState(0);
+  const [priceItems, setPriceItems] = useState(0);  //  ?? чи потрібен тут useState
   useEffect(() =>
   {
     const fetchAllProducts = async () =>
