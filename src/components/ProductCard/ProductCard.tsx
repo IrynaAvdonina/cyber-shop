@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { TItemCart } from '../../pages/ShoppingCart/ShoppingCart';
 
 const ProductCardContainer = styled.div`
   display: flex;
@@ -54,6 +55,21 @@ export const ProductCard = ({ product }: ProductCardProps) =>
 {
   const { id, title, price, thumbnail, images } = product;
 
+  const handleClick = () =>
+  {
+    const storedCart = localStorage.getItem('cart');
+    const cart: TItemCart[] = storedCart ? JSON.parse(storedCart) : [];
+
+    const existingItem = cart.find((item: TItemCart) => item.productID === id);
+
+    if (!existingItem)
+    {
+      cart.push({ productID: id, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   return (
     <ProductCardContainer>
       <div className="img-container">
@@ -65,7 +81,7 @@ export const ProductCard = ({ product }: ProductCardProps) =>
       <div className="product-card-details">
         <a href={`/products/${id}`} className="product-card-name">{title}</a>
         <p className="product-card-price">{price} ₴</p>
-        <button className="add-to-cart-button">Додати до кошика</button>
+        <button onClick={() => handleClick()} className="add-to-cart-button">Додати до кошика</button>
       </div>
     </ProductCardContainer>
   );

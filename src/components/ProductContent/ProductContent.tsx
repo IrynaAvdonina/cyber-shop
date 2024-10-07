@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { TItemCart } from '../../pages/ShoppingCart/ShoppingCart';
 
 const ProductContentContainer = styled.div`
   padding: 1.5rem 4.5rem;
@@ -114,6 +115,22 @@ export type Product = {
 }
 export const ProductContent = ({ id, title, price, category, description, dimensions, stock, brand, sku, weight, images, thumbnail }: Product) =>
 {
+
+  const handleClick = () =>
+  {
+    const storedCart = localStorage.getItem('cart');
+    const cart: TItemCart[] = storedCart ? JSON.parse(storedCart) : [];
+
+    const existingItem = cart.find((item: TItemCart) => item.productID === id);
+
+    if (!existingItem)
+    {
+      cart.push({ productID: id, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
   return (
     <ProductContentContainer>
       <div className="img-container">
@@ -121,15 +138,15 @@ export const ProductContent = ({ id, title, price, category, description, dimens
       </div>
 
       <ProductInfo>
-        <a className='product-category' href="/category/">{category}</a>
+        <a className='product-category' href={`/category/${category}`}>{category}</a>
         <h2 className='product-name'>{title}</h2>
         <p className='product-price'>{price} грн.</p>
         <p className='product-description'>{description}</p>
         <p className='product-dimensions'><span>Розміри: </span> {dimensions.height} × {dimensions.width} × {dimensions.depth}</p>
         <p className='product-weight'><span>Вага: </span>{weight} г.</p>
-        <button className="add-to-cart-button">Додати в кошик</button>
+        <button onClick={() => handleClick()} className="add-to-cart-button">Додати в кошик</button>
       </ProductInfo>
-    </ProductContentContainer>
+    </ProductContentContainer >
   )
 }
 

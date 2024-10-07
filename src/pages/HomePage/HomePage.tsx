@@ -6,7 +6,7 @@ import { MainBanner } from '../../components/MainBanner/MainBanner';
 import { CategoryBanner } from '../../components/CategoryBanner/CategoryBanner';
 import ProductCardList from '../../components/ProductCardList/ProductCardList';
 import { Footer } from '../../components/Footer/Footer';
-import { TProductCard } from '../../components/ProductCard/ProductCard';
+import { TProductCard } from '../../components/ProductCard/ProductCard';// перенести в файл з типами
 import { fetchProducts } from './../../apiService';
 
 

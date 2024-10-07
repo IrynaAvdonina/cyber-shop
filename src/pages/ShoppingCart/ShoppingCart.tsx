@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
-import { CartItems } from '../../components/CartItems/CartItems';
+import { CartItem } from '../../components/CartItems/CartItems';
 import { TProductCard } from '../../components/ProductCard/ProductCard';
 import { fetchProducts } from '../../apiService';
 
@@ -73,13 +73,32 @@ const TotalPricePrgrph = styled.p`
     }
 `;
 
-// TODO: взяти з серверу
-const productsData = [78, 98, 100, 105];
+export interface TItemCart
+{
+  productID: number,
+  quantity: number
+}
 
 export const ShoppingCart = () =>
 {
-  const [cartItems, setCartItems] = useState<TProductCard[] | []>([]);
-  const [priceItems, setPriceItems] = useState(0);  //  ?? чи потрібен тут useState
+  const [cartItems, setCartItems] = useState<TItemCart[]>([]);
+  const [cartProducts, setCartProducts] = useState<TProductCard[] | []>([]);
+
+  useEffect(() =>
+  {
+    const fetchCartItems = () =>
+    {
+      const storedCart = localStorage.getItem('cart');
+      if (storedCart)
+      {
+        const ids = JSON.parse(storedCart);
+        setCartItems(ids);
+      }
+    };
+
+    fetchCartItems();
+  }, []);
+
   useEffect(() =>
   {
     const fetchAllProducts = async () =>
@@ -87,38 +106,76 @@ export const ShoppingCart = () =>
       try
       {
         const allProducts = await fetchProducts();
-        const selectedProducts: TProductCard[] = allProducts.filter((item: TProductCard) => productsData.includes(item.id));
-        setCartItems(selectedProducts);
-        const totalPrice = selectedProducts.reduce((total, item) => total + item.price, 0);
-        setPriceItems(totalPrice);
+
+        const selectedProducts: TProductCard[] = allProducts.filter((product) =>
+          cartItems.some((item) => item.productID === product.id)
+        );
+        setCartProducts(selectedProducts);
       } catch (error)
       {
         console.error('Error fetching product data:', error);
       }
     };
-    fetchAllProducts();
-  }, []);
+
+    if (cartItems.length > 0)
+    {
+      fetchAllProducts();
+    } else
+    {
+      setCartProducts([]);
+    }
+  }, [cartItems]);
+
+  const updateItemQuantity = (productID: number, newQuantity: number) =>
+  {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.productID === productID ? { ...item, quantity: newQuantity } : item
+      )
+    );
+    localStorage.setItem('cart', JSON.stringify(cartItems));
+  };
+
+  const removeItemFromCart = (productID: number) =>
+  {
+    const updatedCart = cartItems.filter((item) => item.productID !== productID);
+    setCartItems(updatedCart);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    const updatedCartProducts = cartProducts.filter(product => product.id !== productID);
+    setCartProducts(updatedCartProducts);
+  };
+
+  const totalPrice = cartProducts.reduce((total, item) =>
+  {
+    const cartItem = cartItems.find(cartItem => cartItem.productID === item.id);
+    return total + (cartItem ? cartItem.quantity * item.price : 0);
+  }, 0);
 
   return (
     <>
       <Header />
       <ShoppingCartContainer>
         <h2>Кошик</h2>
-        {cartItems.length === 0 ? (
+        {cartProducts.length === 0 ? (
           <p>Кошик порожній</p>
         ) : (
           <div className='cart-items'>
-            {cartItems.map((item) => (
-              <CartItems key={item.id} product={item} />
+            {cartProducts.map((item) => (
+              <CartItem
+                key={item.id}
+                product={item}
+                updateQuantity={updateItemQuantity}
+                removeItem={removeItemFromCart}
+              />
             ))}
           </div>
         )}
         <CartPrice>
-          <TotalPricePrgrph>Загальна сума:<span> {priceItems.toFixed(2)}&nbsp;грн.</span></TotalPricePrgrph>
+          <TotalPricePrgrph>Загальна сума:<span> {totalPrice.toFixed(2)}&nbsp;грн.</span></TotalPricePrgrph>
           <button>Оформити</button>
         </CartPrice>
       </ShoppingCartContainer>
       <Footer />
     </>
-  )
-}
+  );
+};

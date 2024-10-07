@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
 import { TProductCard } from '../ProductCard/ProductCard';
+import { TItemCart } from '../../pages/ShoppingCart/ShoppingCart';
 
-const CartItem = styled.div`
+const CartItemDiv = styled.div`
   display: flex;
   justify-content: space-around;
   margin-bottom: 1.25rem;
@@ -92,26 +93,49 @@ const QuantityContainer = styled.div`
 
 interface CartItemsProps
 {
-  product: TProductCard
+  product: TProductCard,
+  updateQuantity: (productID: number, newQuantity: number) => void,
+  removeItem: (productID: number) => void,
 }
 
-export const CartItems = ({ product }: CartItemsProps) => (
-  <CartItem>
-    <a href={`/products/${product.id}`}>
-      <img src={product.thumbnail} alt={product.title} />
-    </a>
-    <ItemDetails>
-      <a href={`/products/${product.id}`}>
-        <h4>{product.title}</h4>
-      </a>
-      <QuantityContainer>
-        <button className="btn-decrease">-</button>
-        <span className="item-quantity">1</span>
-        <button className="btn-increase">+</button>
-      </QuantityContainer>
+export const CartItem = ({ product, updateQuantity, removeItem }: CartItemsProps) =>
+{
+  const storedCart = localStorage.getItem('cart');
+  const cart: TItemCart[] = storedCart ? JSON.parse(storedCart) : [];
+  const productItem: TItemCart = cart.find((item: TItemCart) => item.productID == product.id)!;
+  const [productQuantity, setProductQuantity] = useState(productItem?.quantity);
 
-    </ItemDetails>
-    <p className="item-price" >{product.price}&nbsp;грн.</p>
-    <button className="btn-delete">×</button>
-  </CartItem>
-);
+  return (
+    <CartItemDiv>
+      <a href={`/products/${product.id}`}>
+        <img src={product.thumbnail} alt={product.title} />
+      </a>
+      <ItemDetails>
+        <a href={`/products/${product.id}`}>
+          <h4>{product.title}</h4>
+        </a>
+        <QuantityContainer>
+          <button className="btn-decrease"
+            onClick={() =>
+            {
+              if (productQuantity > 1)
+              {
+                setProductQuantity(prev => prev - 1);
+                updateQuantity(product.id, productQuantity - 1);
+              }
+            }}>-</button>
+          <span className="item-quantity">{productQuantity}</span>
+          <button className="btn-increase"
+            onClick={() =>
+            {
+              setProductQuantity(prev => prev + 1);
+              updateQuantity(product.id, productQuantity + 1);
+            }}>+</button>
+        </QuantityContainer>
+
+      </ItemDetails>
+      <p className="item-price" >{(product.price * productQuantity).toFixed(2)}&nbsp;грн.</p>
+      <button onClick={() => removeItem(product.id)} className="btn-delete">×</button>
+    </CartItemDiv >
+  );
+};

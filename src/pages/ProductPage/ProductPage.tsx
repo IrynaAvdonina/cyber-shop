@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Product, ProductContent } from '../../components/ProductContent/ProductContent';
+import { Product, ProductContent } from '../../components/ProductContent/ProductContent';// продакт тип
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import { fetchProduct } from './../../apiService';
