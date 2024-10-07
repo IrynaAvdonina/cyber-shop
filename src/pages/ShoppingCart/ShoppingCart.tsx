@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import { CartItem } from '../../components/CartItems/CartItems';
-import { TProductCard } from '../../components/ProductCard/ProductCard';
 import { fetchProducts } from '../../apiService';
+import { TItemCart, TProductCard } from '../../types/types';
 
 const ShoppingCartContainer = styled.div`
   margin: auto;
@@ -72,12 +72,6 @@ const TotalPricePrgrph = styled.p`
       font-size:1rem;
     }
 `;
-
-export interface TItemCart
-{
-  productID: number,
-  quantity: number
-}
 
 export const ShoppingCart = () =>
 {

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { TProductCard } from './components/ProductCard/ProductCard'
-import { Product } from './components/ProductContent/ProductContent';
+import { TProduct, TProductCardList, TProductCard } from './types/types';
 
 const selectedCategories = ['smartphones', 'laptops', 'mobile-accessories', 'mens-watches', 'tablets'];
 
@@ -13,11 +12,11 @@ export const fetchCategories = async (topNumber?: number) =>
   return topNumber ? filteredCategories.slice(0, topNumber) : filteredCategories;
 };
 
-type ProductResponse = { products: TProductCard[] };
+
 
 export const fetchProductsByUrl = async (url: string) =>
 {
-  const productsByUrl: ProductResponse = await myCustomFetch(url);
+  const productsByUrl: TProductCardList = await myCustomFetch(url);
   return filterProducts(productsByUrl.products);
 };
 
@@ -25,7 +24,7 @@ export const fetchProductsByUrl = async (url: string) =>
 
 export const fetchProducts = async (topNumber?: number) =>
 {
-  const topProducts: ProductResponse = await myCustomFetch(`https://dummyjson.com/products?limit=0`);
+  const topProducts: TProductCardList = await myCustomFetch(`https://dummyjson.com/products?limit=0`);
   const filteredProducts = filterProducts(topProducts.products);
 
   return topNumber ? filteredProducts.slice(0, topNumber) : filteredProducts;
@@ -35,7 +34,7 @@ export const fetchProducts = async (topNumber?: number) =>
 
 export const fetchProduct = async (id: string) =>
 {
-  const product: Product = await myCustomFetch(`https://dummyjson.com/products/${id}`);
+  const product: TProduct = await myCustomFetch(`https://dummyjson.com/products/${id}`);
   return product;
 };
 

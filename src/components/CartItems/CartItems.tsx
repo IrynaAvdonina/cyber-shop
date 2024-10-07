@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-
-import { TProductCard } from '../ProductCard/ProductCard';
-import { TItemCart } from '../../pages/ShoppingCart/ShoppingCart';
+import { TCartItemsProps, TItemCart } from '../../types/types';
 
 const CartItemDiv = styled.div`
   display: flex;
@@ -91,14 +89,7 @@ const QuantityContainer = styled.div`
   }
 `;
 
-interface CartItemsProps
-{
-  product: TProductCard,
-  updateQuantity: (productID: number, newQuantity: number) => void,
-  removeItem: (productID: number) => void,
-}
-
-export const CartItem = ({ product, updateQuantity, removeItem }: CartItemsProps) =>
+export const CartItem = ({ product, updateQuantity, removeItem }: TCartItemsProps) =>
 {
   const storedCart = localStorage.getItem('cart');
   const cart: TItemCart[] = storedCart ? JSON.parse(storedCart) : [];

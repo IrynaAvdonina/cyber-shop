@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { ProductCard, TProductCard } from '../ProductCard/ProductCard';
+import { ProductCard } from '../ProductCard/ProductCard';
+import { TProductCardList } from '../../types/types';
 
 const ProductListContainer = styled.div`
   display: grid;
@@ -19,12 +20,7 @@ const ProductListContainer = styled.div`
   }
 `;
 
-interface ProductCardListProps
-{
-  products: TProductCard[];
-}
-
-const ProductCardList = ({ products }: ProductCardListProps) =>
+const ProductCardList = ({ products }: TProductCardList) =>
 {
   return (
     <ProductListContainer>

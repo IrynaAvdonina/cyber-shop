@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { TItemCart } from '../../pages/ShoppingCart/ShoppingCart';
+import { TProductCardProps, TItemCart } from '../../types/types';
 
 const ProductCardContainer = styled.div`
   display: flex;
@@ -35,23 +35,7 @@ const ProductCardContainer = styled.div`
   }
 `;
 
-export type TProductCard = {
-  id: number,
-  title: string,
-  price: number,
-  stock?: number,
-  sku: string,
-  category?: string,
-  thumbnail: string,
-  images: string[]
-}
-
-interface ProductCardProps
-{
-  product: TProductCard;
-}
-
-export const ProductCard = ({ product }: ProductCardProps) =>
+export const ProductCard = ({ product }: TProductCardProps) =>
 {
   const { id, title, price, thumbnail, images } = product;
 

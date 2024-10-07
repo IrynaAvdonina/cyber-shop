@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { TItemCart } from '../../pages/ShoppingCart/ShoppingCart';
+import { TProduct, TItemCart } from '../../types/types';
 
 const ProductContentContainer = styled.div`
   padding: 1.5rem 4.5rem;
@@ -95,25 +95,7 @@ const ProductInfo = styled.div`
   }
 `;
 
-export type Product = {
-  id: number,
-  title: string,
-  description: string,
-  dimensions: {
-    width: number,
-    height: number
-    depth: number
-  },
-  price: number,
-  stock: number,
-  brand: string,
-  sku: string,
-  weight: number,
-  category: string,
-  thumbnail?: string,
-  images: string[],
-}
-export const ProductContent = ({ id, title, price, category, description, dimensions, stock, brand, sku, weight, images, thumbnail }: Product) =>
+export const ProductContent = ({ id, title, price, category, description, dimensions, stock, brand, weight, images, thumbnail }: TProduct) =>
 {
 
   const handleClick = () =>
@@ -140,7 +122,7 @@ export const ProductContent = ({ id, title, price, category, description, dimens
       <ProductInfo>
         <a className='product-category' href={`/category/${category}`}>{category}</a>
         <h2 className='product-name'>{title}</h2>
-        <p className='product-price'>{price} грн.</p>
+        {stock >= 0 ? <p className='product-price'>{price} грн.</p> : <p className='product-price'>Немає в наявності</p>}
         <p className='product-description'>{description}</p>
         <p className='product-dimensions'><span>Розміри: </span> {dimensions.height} × {dimensions.width} × {dimensions.depth}</p>
         <p className='product-weight'><span>Вага: </span>{weight} г.</p>
