@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { TCartItemsProps, TItemCart } from '../../types/types';
+import { Link } from 'react-router-dom';
 
 const CartItemDiv = styled.div`
   display: flex;
@@ -98,13 +99,13 @@ export const CartItem = ({ product, updateQuantity, removeItem }: TCartItemsProp
 
   return (
     <CartItemDiv>
-      <a href={`/products/${product.id}`}>
+      <Link to={`/products/${product.id}`}>
         <img src={product.thumbnail} alt={product.title} />
-      </a>
+      </Link>
       <ItemDetails>
-        <a href={`/products/${product.id}`}>
+        <Link to={`/products/${product.id}`}>
           <h4>{product.title}</h4>
-        </a>
+        </Link>
         <QuantityContainer>
           <button className="btn-decrease"
             onClick={() =>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Product, ProductContent } from '../../components/ProductContent/ProductContent';// продакт тип
-import { Header } from '../../components/Header/Header';
-import { Footer } from '../../components/Footer/Footer';
+import { ProductContent } from '../../components/ProductContent/ProductContent';
+import { TProduct as Product } from '../../types/types';
+
 import { fetchProduct } from './../../apiService';
 
 export const ProductPage = () =>
@@ -34,7 +34,6 @@ export const ProductPage = () =>
   }, [productId]);
   return (
     <>
-      <Header />
       {product && (
         <ProductContent
           id={product.id}
@@ -45,12 +44,10 @@ export const ProductPage = () =>
           dimensions={product.dimensions}
           stock={product.stock}
           brand={product.brand}
-          sku={product.sku}
           weight={product.weight}
           images={product.images}
         />
       )}
-      <Footer />
     </>
   )
 }

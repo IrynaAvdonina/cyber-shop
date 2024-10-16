@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { TProductCardProps, TItemCart } from '../../types/types';
+import { Link } from 'react-router-dom';
 
 const ProductCardContainer = styled.div`
   display: flex;
@@ -57,13 +58,13 @@ export const ProductCard = ({ product }: TProductCardProps) =>
   return (
     <ProductCardContainer>
       <div className="img-container">
-        <a href={`/products/${id}`} className="product-card-name">
+        <Link to={`/products/${id}`} className="product-card-name">
           <img src={thumbnail} alt={title} className="product-card-image thumbnail" />
-        </a>
+        </Link>
       </div>
 
       <div className="product-card-details">
-        <a href={`/products/${id}`} className="product-card-name">{title}</a>
+        <Link to={`/products/${id}`} className="product-card-name">{title}</Link>
         <p className="product-card-price">{price} ₴</p>
         <button onClick={() => handleClick()} className="add-to-cart-button">Додати до кошика</button>
       </div>

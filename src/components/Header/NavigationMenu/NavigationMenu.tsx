@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 const NavMenu = styled.nav`
   ul {
@@ -50,8 +51,8 @@ export const NavigationMenu = () =>
   return (
     <NavMenu>
       <ul >
-        <li><a href="/" aria-label="Go to Main Page">Головна</a></li>
-        <li><a href="/categories" aria-label="Go to Category Page">Категорії</a></li>
+        <li><Link to="/" aria-label="Go to Main Page">Головна</Link></li>
+        <li><Link to="/categories" aria-label="Go to Category Page">Категорії</Link></li>
       </ul>
     </NavMenu>
   );

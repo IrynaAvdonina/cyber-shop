@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from '@emotion/styled';
 
-import { Header } from '../../components/Header/Header';
-import { Footer } from '../../components/Footer/Footer';
 import ProductCardList from '../../components/ProductCardList/ProductCardList';
-import { TProductCard } from '../../components/ProductCard/ProductCard';
+import { TProductCard } from '../../types/types';;
 import { capitalize } from './../../components/CategoryBanner/CategoryBanner';
 import { fetchCategories, fetchProductsByUrl } from './../../apiService';
 
@@ -153,7 +151,6 @@ export const CategoryPage = () =>
 
   return (
     <>
-      <Header />
       <CategoriesContent>
         <CategoriesFilter>
           <p>Виберіть категорію товарів:</p>
@@ -174,7 +171,6 @@ export const CategoryPage = () =>
           <ProductCardList products={products} />
         </CategoriedProducts>
       </CategoriesContent>
-      <Footer />
     </>
   );
 };

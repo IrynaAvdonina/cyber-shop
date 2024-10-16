@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { AppRout } from './AppRout'
+import { AppRout } from './routes/AppRout'
 import { Global, css } from '@emotion/react';
 
 const globalStyle = css`
@@ -12,6 +12,12 @@ const globalStyle = css`
   body {
     margin: 0;
     box-sizing: border-box;
+  }
+
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
   }
 
   h1 {
@@ -36,5 +42,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Global
       styles={globalStyle} />
     <AppRout />
-  </React.StrictMode>,
+  </React.StrictMode>
 )

@@ -4,7 +4,7 @@ export type TProductCard = {
   price: number,
   stock: number,
   category?: string,
-  thumbnail: string,
+  thumbnail?: string,
   images: string[]
 }
 

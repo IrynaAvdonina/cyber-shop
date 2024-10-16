@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { TProduct, TItemCart } from '../../types/types';
+import { Link } from 'react-router-dom';
 
 const ProductContentContainer = styled.div`
   padding: 1.5rem 4.5rem;
@@ -120,7 +121,7 @@ export const ProductContent = ({ id, title, price, category, description, dimens
       </div>
 
       <ProductInfo>
-        <a className='product-category' href={`/category/${category}`}>{category}</a>
+        <Link className='product-category' to={`/category/${category}`}>{category}</Link>
         <h2 className='product-name'>{title}</h2>
         {stock >= 0 ? <p className='product-price'>{price} грн.</p> : <p className='product-price'>Немає в наявності</p>}
         <p className='product-description'>{description}</p>

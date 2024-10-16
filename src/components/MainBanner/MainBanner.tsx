@@ -81,7 +81,7 @@ const LinkToBuy = styled.a`
     margin: 0.5rem 0;
   }
 `;
-
+//TODO a->link
 export const MainBanner = () => (
   <MainBannerContainer>
     <BannerContent>

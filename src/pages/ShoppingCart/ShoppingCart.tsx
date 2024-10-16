@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 
-import { Header } from '../../components/Header/Header';
-import { Footer } from '../../components/Footer/Footer';
 import { CartItem } from '../../components/CartItems/CartItems';
 import { fetchProducts } from '../../apiService';
 import { TItemCart, TProductCard } from '../../types/types';
@@ -41,7 +39,6 @@ const ShoppingCartContainer = styled.div`
     }
   }
 `;
-
 const CartPrice = styled.div`
   text-align: center;
   button {
@@ -147,7 +144,6 @@ export const ShoppingCart = () =>
 
   return (
     <>
-      <Header />
       <ShoppingCartContainer>
         <h2>Кошик</h2>
         {cartProducts.length === 0 ? (
@@ -169,7 +165,6 @@ export const ShoppingCart = () =>
           <button>Оформити</button>
         </CartPrice>
       </ShoppingCartContainer>
-      <Footer />
     </>
   );
 };

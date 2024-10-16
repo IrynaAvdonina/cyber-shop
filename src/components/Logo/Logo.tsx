@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled';
 
 import logoImage from '../../assets/logo.svg';
+import { Link } from 'react-router-dom';
 
 const LogoContainer = styled.div`
   display: flex;
@@ -19,8 +20,8 @@ const LogoImage = styled.img`
 
 export const Logo = () => (
   <LogoContainer>
-    <a href="/">
+    <Link to="/">
       <LogoImage src={logoImage} alt="logo" />
-    </a>
+    </Link>
   </LogoContainer>
 );

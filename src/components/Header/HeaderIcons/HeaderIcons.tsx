@@ -2,6 +2,7 @@ import React from 'react';
 import cartIcon from './../../../assets/cart.png';
 import accountIcon from './../../../assets/user.png';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 const HeaderIconsContainer = styled.div`
   display: flex;
@@ -25,11 +26,11 @@ const HeaderIconsContainer = styled.div`
 
 export const HeaderIcons = () => (
   <HeaderIconsContainer>
-    <a href="/shoppingCart" aria-label="Go to Shopping Cart">
+    <Link to="/shoppingCart" aria-label="Go to Shopping Cart">
       <img src={cartIcon} alt="Shopping Cart icon" />
-    </a>
-    <a href="/account" aria-label="Go to My Account">
+    </Link>
+    <Link to="/account" aria-label="Go to My Account">
       <img src={accountIcon} alt="My Account icon" />
-    </a>
+    </Link>
   </HeaderIconsContainer>
 );

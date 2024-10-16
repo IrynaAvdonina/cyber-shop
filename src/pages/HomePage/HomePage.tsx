@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 
-import { Header } from '../../components/Header/Header';
 import { MainBanner } from '../../components/MainBanner/MainBanner';
 import { CategoryBanner } from '../../components/CategoryBanner/CategoryBanner';
 import ProductCardList from '../../components/ProductCardList/ProductCardList';
-import { Footer } from '../../components/Footer/Footer';
-import { TProductCard } from '../../components/ProductCard/ProductCard';// перенести в файл з типами
+import { TProductCard } from '../../types/types';
 import { fetchProducts } from './../../apiService';
 
 
@@ -50,14 +48,12 @@ export function HomePage()
 
   return (
     <>
-      <Header />
       <MainBanner />
       <CategoryBanner />
       <NewProductBanner>
         <h2>Новинки</h2>
         <ProductCardList products={products} />
       </NewProductBanner>
-      <Footer />
     </>
   )
 }
