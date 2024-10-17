@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const NavMenu = styled.nav`
   ul {
@@ -36,8 +36,13 @@ const NavMenu = styled.nav`
       visibility: visible;
       transform: scaleX(1);
     }
+    
   }
-  @media (max-width: 768px) {
+  .active{
+    color: #8685EF;
+}
+
+@media (max-width: 768px) {
       order: 3;
       li{
         margin: 0 0.8rem;
@@ -51,8 +56,8 @@ export const NavigationMenu = () =>
   return (
     <NavMenu>
       <ul >
-        <li><Link to="/" aria-label="Go to Main Page">Головна</Link></li>
-        <li><Link to="/categories" aria-label="Go to Category Page">Категорії</Link></li>
+        <li><NavLink to="/" aria-label="Go to Main Page">Головна</NavLink></li>
+        <li><NavLink to="/categories" aria-label="Go to Category Page">Категорії</NavLink></li>
       </ul>
     </NavMenu>
   );

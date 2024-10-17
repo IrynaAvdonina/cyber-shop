@@ -30,6 +30,7 @@ const ProductCardContainer = styled.div`
     padding: 0.5rem;
     margin-bottom: 1rem;
     font-size: 0.9rem;
+    transition: all 0.2s ease-out;
     &:hover {
       transform: translateY(-0.25em);
     }

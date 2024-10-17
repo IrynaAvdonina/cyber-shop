@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 import { TProduct, TItemCart } from '../../types/types';
 import { Link } from 'react-router-dom';
 
@@ -7,14 +11,16 @@ const ProductContentContainer = styled.div`
   padding: 1.5rem 4.5rem;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+  gap: 5rem;
+  padding-bottom: 5rem;
   .img-container {
     flex: 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    max-width: 40%;
   }
   img {
-    width: 70%;
+    padding: 1rem;
+    max-width: 90%; 
   }
 
   @media (max-width: 768px) {
@@ -22,7 +28,13 @@ const ProductContentContainer = styled.div`
     padding: 1.2rem 1.5rem;
   }
 `;
-
+const SliderWrapper = styled.div`
+  .slick-prev:before,
+  .slick-next:before {
+    color: #9a9a9a;
+    font-size: 25px;
+  }
+`;
 const ProductInfo = styled.div`
   background-color: #f2f2f2;
   padding: 1.25rem;
@@ -96,9 +108,16 @@ const ProductInfo = styled.div`
   }
 `;
 
+
 export const ProductContent = ({ id, title, price, category, description, dimensions, stock, brand, weight, images, thumbnail }: TProduct) =>
 {
-
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   const handleClick = () =>
   {
     const storedCart = localStorage.getItem('cart');
@@ -117,8 +136,22 @@ export const ProductContent = ({ id, title, price, category, description, dimens
   return (
     <ProductContentContainer>
       <div className="img-container">
-        <img src={images[0]} alt={title + ' ' + id} />
+        {images.length > 1 ?
+          <SliderWrapper>
+            <Slider {...settings}>
+              {images.map((image, index) => (
+                <div key={index}>
+                  <img src={image} alt={title + ' ' + id} />
+                </div>
+              ))}
+            </Slider>
+          </SliderWrapper>
+          :
+          <div >
+            <img src={images[0]} alt={title + ' ' + id} />
+          </div>}
       </div>
+
 
       <ProductInfo>
         <Link className='product-category' to={`/category/${category}`}>{category}</Link>

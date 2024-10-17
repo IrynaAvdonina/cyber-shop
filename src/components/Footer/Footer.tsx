@@ -6,18 +6,16 @@ const FooterContainer = styled.footer`
   position: relative;
   bottom: 0;
   display: flex;
-  padding: 2.5rem 2rem;
+  padding: 1.5rem 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: rgb(200, 200, 200);
-  gap: 1.25rem;
+  gap: 0.8rem;
   p {
     order: 2;
   }
   @media (max-width: 768px) {
-    padding: 1.5rem 1.5rem;
-    gap: 0.8rem;
     p {
       font-size: 0.9rem;
       text-align: center;

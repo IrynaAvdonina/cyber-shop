@@ -1,6 +1,7 @@
 import React from 'react'
 import bannerImage from '../../assets/banner-image.png';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 const mainBannerProductId = 123;
 
@@ -62,7 +63,7 @@ const BannerContent = styled.div`
   }
 `;
 
-const LinkToBuy = styled.a`
+const LinkToBuy = styled(Link)`
   padding: 1rem 3.5rem;
   border-radius: 0.5rem;
   border: 1px solid #FFF;
@@ -81,13 +82,13 @@ const LinkToBuy = styled.a`
     margin: 0.5rem 0;
   }
 `;
-//TODO a->link
+
 export const MainBanner = () => (
   <MainBannerContainer>
     <BannerContent>
       <h1>IPhone 13 Pro</h1>
       <p>Створений, щоб змінити все на краще. Для кожного.</p>
-      <LinkToBuy href={`/products/${mainBannerProductId}`}>Купити</LinkToBuy>
+      <LinkToBuy to={`/products/${mainBannerProductId}`}>Купити</LinkToBuy>
     </BannerContent>
   </MainBannerContainer>
 );

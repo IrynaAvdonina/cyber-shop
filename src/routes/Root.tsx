@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 import styled from '@emotion/styled';
 
 const MainDiv = styled.main`
-flex-grow: 1;
+  flex-grow: 1;
 `;
 export const Root = () => (
   <>

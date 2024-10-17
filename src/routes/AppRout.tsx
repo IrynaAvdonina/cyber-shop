@@ -7,7 +7,6 @@ import { ShoppingCart } from '../pages/ShoppingCart/ShoppingCart';
 import { Root } from './Root';
 import { ErrorPage } from './ErrorPage';
 
-// перейти на новий роутер
 export function AppRout()
 {
   const router = createBrowserRouter(
@@ -19,7 +18,7 @@ export function AppRout()
         <Route path="/categories" element={<CategoryPage />} />
         <Route path="/shoppingCart" element={<ShoppingCart />} />
         <Route path="/products/:id" element={<ProductPage />} />
-        <Route path="*" element={<ErrorPage />} /> {/* Для помилкових маршрутів */}
+        <Route path="*" element={<ErrorPage />} />
 
       </Route>
     ))
