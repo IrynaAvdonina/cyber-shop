@@ -6,7 +6,7 @@ import categoryLaptops from '../../assets/category-laptops.png';
 import categoryMobAcs from '../../assets/category-mobacs.png';
 import categorySmWatches from '../../assets/category-smart-watches.png';
 import categoryHeadphones from '../../assets/category-headphones.png';
-import unknownCategory from '../../assets/unknown-category_2.svg';
+import unknownCategory from '../../assets/unknown-category.svg';
 import { fetchCategories } from './../../apiService';
 
 

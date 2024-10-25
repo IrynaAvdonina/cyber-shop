@@ -1,19 +1,20 @@
 import React from 'react';
 import cartIcon from './../../../assets/cart.png';
-import accountIcon from './../../../assets/user.png';
+import changeThemeIcon from './../../../assets/dark-theme-icon.svg';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 
 const HeaderIconsContainer = styled.div`
   display: flex;
   gap: 1rem;
-  a {
-    padding: 0.625rem;
+  a, button {
+    padding: 0.5rem 0.625rem;
     border-radius: 1.5rem;
-    background: white;
+    //background: white;
     transition: all 0.3s ease-in-out;
     &:hover{
-      background: radial-gradient(circle, rgba(192, 185, 192, 0.608) 35%, transparent);
+      transform: scale(1.1);
+      opacity: 0.8;
     }
     img{
       width: 2rem;
@@ -29,8 +30,9 @@ export const HeaderIcons = () => (
     <Link to="/shoppingCart" aria-label="Go to Shopping Cart">
       <img src={cartIcon} alt="Shopping Cart icon" />
     </Link>
-    <Link to="/account" aria-label="Go to My Account">
-      <img src={accountIcon} alt="My Account icon" />
-    </Link>
+    <button >
+      <img src={changeThemeIcon} alt="Icon Change Theme" />
+    </button>
+
   </HeaderIconsContainer>
 );
