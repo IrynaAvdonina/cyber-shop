@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { CartItem } from '../../components/CartItems/CartItems';
 import { fetchProducts } from '../../apiService';
@@ -130,10 +132,13 @@ export const ShoppingCart = () =>
   const removeItemFromCart = (productID: number) =>
   {
     const updatedCart = cartItems.filter((item) => item.productID !== productID);
-    setCartItems(updatedCart);
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
     const updatedCartProducts = cartProducts.filter(product => product.id !== productID);
+
+    setCartItems(updatedCart);
     setCartProducts(updatedCartProducts);
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+
+    toast("Товар видалено з кошика!", { type: 'warning' });
   };
 
   const totalPrice = cartProducts.reduce((total, item) =>
@@ -141,6 +146,12 @@ export const ShoppingCart = () =>
     const cartItem = cartItems.find(cartItem => cartItem.productID === item.id);
     return total + (cartItem ? cartItem.quantity * item.price : 0);
   }, 0);
+
+  let localePrice = totalPrice.toLocaleString("uk-UA", {
+    style: "currency",
+    currency: "UAH",
+    minimumFractionDigits: 2,
+  });
 
   return (
     <>
@@ -161,10 +172,21 @@ export const ShoppingCart = () =>
           </div>
         )}
         <CartPrice>
-          <TotalPricePrgrph>Загальна сума:<span> {totalPrice.toFixed(2)}&nbsp;грн.</span></TotalPricePrgrph>
+          <TotalPricePrgrph>Загальна сума:<span> {localePrice}&nbsp;</span></TotalPricePrgrph>
           <button>Оформити</button>
         </CartPrice>
+
       </ShoppingCartContainer>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="colored"
+      />
     </>
   );
 };

@@ -27,8 +27,3 @@ export function AppRout()
     <RouterProvider router={router} />
   );
 }
-function createBrowserRoutesFromElements(arg0: React.JSX.Element): import("react-router-dom").RouteObject[]
-{
-  throw new Error('Function not implemented.');
-}
-

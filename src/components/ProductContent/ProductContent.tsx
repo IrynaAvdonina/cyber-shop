@@ -3,9 +3,11 @@ import styled from '@emotion/styled';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { TProduct, TItemCart } from '../../types/types';
-import { Link } from 'react-router-dom';
 
 const ProductContentContainer = styled.div`
   padding: 1.5rem 4.5rem;
@@ -122,15 +124,15 @@ export const ProductContent = ({ id, title, price, category, description, dimens
   {
     const storedCart = localStorage.getItem('cart');
     const cart: TItemCart[] = storedCart ? JSON.parse(storedCart) : [];
-
     const existingItem = cart.find((item: TItemCart) => item.productID === id);
 
     if (!existingItem)
     {
       cart.push({ productID: id, quantity: 1 });
     }
-
     localStorage.setItem('cart', JSON.stringify(cart));
+    toast('Товар додано до кошика!', { type: 'success' });
+
   }
 
   return (
@@ -160,7 +162,17 @@ export const ProductContent = ({ id, title, price, category, description, dimens
         <p className='product-description'>{description}</p>
         <p className='product-dimensions'><span>Розміри: </span> {dimensions.height} × {dimensions.width} × {dimensions.depth}</p>
         <p className='product-weight'><span>Вага: </span>{weight} г.</p>
-        <button onClick={() => handleClick()} className="add-to-cart-button">Додати в кошик</button>
+        <button onClick={handleClick} className="add-to-cart-button">Додати в кошик</button>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          pauseOnFocusLoss
+          pauseOnHover
+          theme="colored"
+        />
       </ProductInfo>
     </ProductContentContainer >
   )

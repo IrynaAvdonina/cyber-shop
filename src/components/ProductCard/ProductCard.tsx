@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { TProductCardProps, TItemCart } from '../../types/types';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { TProductCardProps, TItemCart } from '../../types/types';
 
 const ProductCardContainer = styled.div`
   display: flex;
@@ -35,6 +38,9 @@ const ProductCardContainer = styled.div`
       transform: translateY(-0.25em);
     }
   }
+  &:hover {
+    border: 1px #f3f3f3 solid;
+    }
 `;
 
 export const ProductCard = ({ product }: TProductCardProps) =>
@@ -43,17 +49,21 @@ export const ProductCard = ({ product }: TProductCardProps) =>
 
   const handleClick = () =>
   {
+
     const storedCart = localStorage.getItem('cart');
     const cart: TItemCart[] = storedCart ? JSON.parse(storedCart) : [];
-
     const existingItem = cart.find((item: TItemCart) => item.productID === id);
 
     if (!existingItem)
     {
       cart.push({ productID: id, quantity: 1 });
     }
-
+    //TODO перенести компонент тостера в окремтй
     localStorage.setItem('cart', JSON.stringify(cart));
+    toast('Товар додано до кошика!', {
+      type: 'success',
+    }
+    );
   }
 
   return (
@@ -67,7 +77,17 @@ export const ProductCard = ({ product }: TProductCardProps) =>
       <div className="product-card-details">
         <Link to={`/products/${id}`} className="product-card-name">{title}</Link>
         <p className="product-card-price">{price} ₴</p>
-        <button onClick={() => handleClick()} className="add-to-cart-button">Додати до кошика</button>
+        <button onClick={handleClick} className="add-to-cart-button">Додати до кошика</button>
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={true}
+          closeOnClick
+          pauseOnFocusLoss
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </ProductCardContainer>
   );

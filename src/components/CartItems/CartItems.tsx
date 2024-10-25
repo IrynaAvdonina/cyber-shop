@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { TCartItemsProps, TItemCart } from '../../types/types';
 import { Link } from 'react-router-dom';
+
+import { TCartItemsProps, TItemCart } from '../../types/types';
+
 
 const CartItemDiv = styled.div`
   display: flex;
@@ -97,6 +99,16 @@ export const CartItem = ({ product, updateQuantity, removeItem }: TCartItemsProp
   const productItem: TItemCart = cart.find((item: TItemCart) => item.productID == product.id)!;
   const [productQuantity, setProductQuantity] = useState(productItem?.quantity);
 
+  const handleClick = () =>
+  {
+    removeItem(product.id);
+  }
+  let itemPrice = (product.price * productQuantity).toLocaleString("uk-UA", {
+    style: "currency",
+    currency: "UAH",
+    minimumFractionDigits: 2,
+  });
+
   return (
     <CartItemDiv>
       <Link to={`/products/${product.id}`}>
@@ -126,8 +138,9 @@ export const CartItem = ({ product, updateQuantity, removeItem }: TCartItemsProp
         </QuantityContainer>
 
       </ItemDetails>
-      <p className="item-price" >{(product.price * productQuantity).toFixed(2)}&nbsp;грн.</p>
-      <button onClick={() => removeItem(product.id)} className="btn-delete">×</button>
-    </CartItemDiv >
+      <p className="item-price" >{itemPrice}</p>
+      <button className="btn-delete" onClick={handleClick}>×</button>
+    </CartItemDiv>
+
   );
 };
