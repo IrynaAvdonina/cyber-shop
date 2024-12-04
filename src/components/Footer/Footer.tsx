@@ -10,7 +10,7 @@ const FooterContainer = styled.footer`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(200, 200, 200);
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   gap: 0.8rem;
   p {
     order: 2;

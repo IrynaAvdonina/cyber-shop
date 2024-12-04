@@ -9,7 +9,7 @@ const MainBannerContainer = styled.div`
   display: flex;
   padding: 2.5rem 8rem 0;
   align-items: center;
-  background: #211C24 url(${bannerImage}) no-repeat 80% bottom / 20%;
+  background:  ${({ theme }) => theme.colors.backgroundDark} url(${bannerImage}) no-repeat 80% bottom / 20%;
   justify-content: space-around;
   @media (max-width: 768px) {
     padding: 2rem;
@@ -31,14 +31,14 @@ const BannerContent = styled.div`
   flex: 2;
 
   h1 {
-    color: #FFF;
+    color: ${({ theme }) => theme.colors.textOnDark};
     font-family: Poppins;
     font-size: 6vw;
     font-weight: 300;
     margin: 2rem 0;
   }
   p {
-    color: #909090;
+    color:  ${({ theme }) => theme.colors.textMutedOnDark};
     font-size: 1.1rem;
     width: 70%;
   }
@@ -66,15 +66,16 @@ const BannerContent = styled.div`
 const LinkToBuy = styled(Link)`
   padding: 1rem 3.5rem;
   border-radius: 0.5rem;
-  border: 1px solid #FFF;
-  color: #909090;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  color:  ${({ theme }) => theme.colors.textMutedOnDark};
   font-size: 1.1rem;
   margin: 1rem 0;
   text-decoration: none;
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
   &:hover {
-    box-shadow: 0 0 0.5em 0 #5e5e5e
+    transform: translateY(-5px);
+    box-shadow: 0 0 0.5em 0 ${({ theme }) => theme.colors.boxShadow}
   }
   @media (max-width: 475px) {
     padding: 0.5rem 1.5rem;

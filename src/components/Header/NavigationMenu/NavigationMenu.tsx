@@ -15,7 +15,7 @@ const NavMenu = styled.nav`
   }
 
   a {
-    color: black;
+    color: ${({ theme }) => theme.colors.textPrimary};
     font-size: 1rem;
     text-decoration: none;
     position: relative;
@@ -27,7 +27,7 @@ const NavMenu = styled.nav`
       height: 2px;
       bottom: 0;
       left: 0;
-      background-color: #8685EF;
+      background-color:  ${({ theme }) => theme.colors.accentPrimary};
       visibility: hidden;
       transform: scaleX(0);
       transition: all 0.3s ease-in-out;
@@ -39,7 +39,7 @@ const NavMenu = styled.nav`
     
   }
   .active{
-    color: #8685EF;
+    color:  ${({ theme }) => theme.colors.accentPrimary};
 }
 
 @media (max-width: 768px) {

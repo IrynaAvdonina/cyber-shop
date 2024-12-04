@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled';
 
-import logoImage from '../../assets/logo.svg';
+import LogoImage from '../../assets/logo.svg?react';
 import { Link } from 'react-router-dom';
 
 const LogoContainer = styled.div`
@@ -13,15 +13,16 @@ const LogoContainer = styled.div`
   }
 `;
 
-const LogoImage = styled.img`
+const LogoImageContainer = styled(LogoImage)`
   width: 6.25rem;
+  color:${({ theme }) => theme.colors.textPrimary};
   height: auto ;
 `;
 
 export const Logo = () => (
   <LogoContainer>
     <Link to="/">
-      <LogoImage src={logoImage} alt="logo" />
+      <LogoImageContainer />
     </Link>
   </LogoContainer>
 );

@@ -10,7 +10,7 @@ const CartItemDiv = styled.div`
   justify-content: space-around;
   margin-bottom: 1.25rem;
   padding: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid  ${({ theme }) => theme.colors.border};
   border-radius: 15px;
   align-items: center;
   position: relative;
@@ -26,21 +26,21 @@ const CartItemDiv = styled.div`
   }
   .item-price {
     padding: 0.625rem;
-    color: #333;
+    color: ${({ theme }) => theme.colors.textSecondary};
     font-size: 1.25rem;
     font-weight: 500;
     width: 6.25rem;
   }
   .btn-delete {
     padding: 0.2rem 0.5rem;
-    background-color: rgb(251, 100, 100);
-    color: #fff;
+    background-color:  ${({ theme }) => theme.colors.criticalPrimary};
+    color: ${({ theme }) => theme.colors.textOnDark};
     transition: background-color 0.3s ease;
     position: absolute;
     top: 1rem;
     right: 1.25rem;
     &:hover {
-      background-color: rgb(230, 80, 80);
+      background-color:  ${({ theme }) => theme.colors.criticalSecondary};
     }
   }
 
@@ -66,7 +66,7 @@ const ItemDetails = styled.div`
     margin: 0;
     font-size: 1.1rem;
     font-weight: 500;
-    color: #333;
+    color: ${({ theme }) => theme.colors.textSecondary};
   }
   @media (max-width: 768px) {
     flex-direction: column;
@@ -83,11 +83,11 @@ const QuantityContainer = styled.div`
   button {
     padding: 0.3rem 0.7rem;
     text-align: center;
-    background-color: #e0e0e0;
+    background-color:  ${({ theme }) => theme.colors.buttonBackground};
     cursor: pointer;
     transition: background-color 0.3s ease;
     &:hover {
-      background-color: #c8c8c8;
+      background-color: ${({ theme }) => theme.colors.buttonHover};
     }
   }
 `;

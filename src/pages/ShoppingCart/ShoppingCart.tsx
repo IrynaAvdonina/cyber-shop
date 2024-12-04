@@ -16,7 +16,7 @@ const ShoppingCartContainer = styled.div`
     font-size: 1.8rem;
     text-align: center;
     margin: 0.5rem;
-    color: #333333;
+    color: ${(props) => props.theme.colors.textPrimary};
   }
   .cart-items {
     margin: 1.5rem;
@@ -48,10 +48,9 @@ const CartPrice = styled.div`
     text-align: center;
     font-size: 1.1rem;
     transition: all 0.5s ease-in-out;
-    background-color: #53e04cad;
+    background-color: ${({ theme }) => theme.colors.accentPrimary};
     &:hover {
       transform: translateY(-0.25em);
-      box-shadow: 0 0 0.5em 0 #5e5e5e;
     }
   }
 `;
@@ -59,7 +58,7 @@ const TotalPricePrgrph = styled.p`
   padding: 0.625rem;
   font-size: 1.125rem;
   span {
-    color: black;
+    color: ${({ theme }) => theme.colors.textPrimary};
     margin-left: 0.5rem;
     font-weight: 600;
     font-size: 1.3rem;

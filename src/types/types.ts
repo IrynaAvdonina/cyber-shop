@@ -41,3 +41,8 @@ export type TItemCart =
     productID: number,
     quantity: number
   }
+
+export type ThemeContextType = {
+  isDarkTheme: boolean;
+  toggleTheme: () => void;
+}

@@ -52,18 +52,18 @@ const CategoriesItems = styled.ul`
 
 const CategoryFilterBtn = styled.button<{ selected?: boolean }>`
   background-color: transparent;
+  color: ${({ theme }) => theme.colors.textPrimary};
   border: none;
   padding: 1rem;
   cursor: pointer;
   width: 100%;
   text-align: left;
   transition: background-color 0.3s ease;
-  border-radius: 5px;
-  
-  border-bottom: 2px #8685EF solid;
+  border-radius: 8px;
+  border-bottom: 2px  ${({ theme }) => theme.colors.accentPrimary} solid;
 
   &:hover {
-    background-color: #e0e0e0;
+    background-color:  ${({ theme }) => theme.colors.buttonBackground};
   }
 
   ${({ selected }) =>
@@ -82,7 +82,7 @@ const CategoriedProducts = styled.div`
   }
   @media (max-width: 768px) {
     margin-right: 0;
-    justify-content: space-evenly
+    justify-content: space-evenly;
   }
 `;
 

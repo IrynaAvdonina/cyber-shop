@@ -33,12 +33,12 @@ const ProductContentContainer = styled.div`
 const SliderWrapper = styled.div`
   .slick-prev:before,
   .slick-next:before {
-    color: #9a9a9a;
+    color: ${({ theme }) => theme.colors.borderSecondary};
     font-size: 25px;
   }
 `;
 const ProductInfo = styled.div`
-  background-color: #f2f2f2;
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
   padding: 1.25rem;
   border-radius: 10px;
   flex: 2;
@@ -46,7 +46,7 @@ const ProductInfo = styled.div`
   flex-direction: column;
   align-items: center;
   a {
-    color: #5e5fb5;
+    color:  ${({ theme }) => theme.colors.accentSecondary};
     font-size: 1.1rem;
     text-decoration: none;
     transition: all 0.5s ease-in-out;
@@ -62,7 +62,7 @@ const ProductInfo = styled.div`
 
   h2 {
     font-size: 2rem;
-    color: #333;
+    color: ${({ theme }) => theme.colors.textPrimary};
     text-align:center;
   }
 
@@ -81,11 +81,12 @@ const ProductInfo = styled.div`
     font-weight: 600;
     margin-right: 0.8rem;
   }
-  button{
+  button {
     padding: 1rem;
     margin-bottom: 1rem;
     font-size: 1rem;
     transition: all 0.3s ease-in-out;
+    
     &:hover {
       transform: translateY(-0.25em);
     }

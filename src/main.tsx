@@ -1,17 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { AppRout } from './routes/AppRout'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import { Global, css } from '@emotion/react';
 
-const globalStyle = css`
-  :root {
-    font-family: Inter, system-ui, sans-serif;
-    background-color: #ffffff;
-  }
+import { ThemeProvider } from "./context/ThemeContext";
+import { AppRout } from "./routes/AppRout";
+import { ThemeType } from './themes/themes';
+
+const globalStyle = (theme: ThemeType) => css`
 
   body {
+    font-family: Inter, system-ui, sans-serif;
     margin: 0;
     box-sizing: border-box;
+    background-color: ${theme.colors.backgroundPrimary};
+    color: ${theme.colors.textPrimary};
   }
 
   #root {
@@ -29,9 +31,13 @@ const globalStyle = css`
     font-family: Inter, system-ui, sans-serif;
     border: 2px solid transparent;
     font-size: 1em;
-    background-color: #dbdbdb;
+    background-color: ${theme.colors.buttonBackground};
     cursor: pointer;
+    &:hover {
+      background-color: ${theme.colors.buttonHover};
+    }
   }
+
   input{
     font-family: Inter, system-ui, sans-serif;
   }
@@ -39,8 +45,10 @@ const globalStyle = css`
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Global
-      styles={globalStyle} />
-    <AppRout />
+    <ThemeProvider>
+      <Global
+        styles={globalStyle} />
+      <AppRout />
+    </ThemeProvider>
   </React.StrictMode>
 )

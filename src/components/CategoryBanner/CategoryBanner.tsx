@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 
-import categorySmartphones from '../../assets/category-smartphones.png';
-import categoryLaptops from '../../assets/category-laptops.png';
-import categoryMobAcs from '../../assets/category-mobacs.png';
-import categorySmWatches from '../../assets/category-smart-watches.png';
-import categoryHeadphones from '../../assets/category-headphones.png';
-import unknownCategory from '../../assets/unknown-category.svg';
+import CategorySmartphones from '../../assets/category-smartphones.svg?react';
+import CategoryLaptops from '../../assets/category-laptops.svg?react';
+import CategoryMobAcs from '../../assets/category-mobacs.svg?react';
+import CategorySmWatches from '../../assets/category-smart-watches.svg?react';
+import CategoryTablets from '../../assets/category-tablets.svg?react';
+import UnknownCategory from '../../assets/unknown-category.svg?react';
 import { fetchCategories } from './../../apiService';
 
 
-const categoryImages: Record<string, string> = {
-  smartphones: categorySmartphones,
-  laptops: categoryLaptops,
-  'mobile-accessories': categoryMobAcs,
-  'mens-watches': categorySmWatches,
-  tablets: categoryHeadphones,//
+const categoryImages: Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>> = {
+  smartphones: CategorySmartphones,
+  laptops: CategoryLaptops,
+  'mobile-accessories': CategoryMobAcs,
+  'mens-watches': CategorySmWatches,
+  tablets: CategoryTablets,
 };
+
 
 const CategoryBannerContainer = styled.div`
   display: flex;
@@ -44,6 +45,9 @@ const CategoryList = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
+  p {
+    text-align: center;
+  }
   @media (max-width: 768px) {
     gap: 0.6rem;
   }
@@ -54,9 +58,8 @@ const CategoryItem = styled.a`
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  color: #333;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  color: ${({ theme }) => theme.colors.textPrimary};
+  border: 1px solid  ${({ theme }) => theme.colors.border};
   border-radius: 8px;
   transition: transform 0.3s, box-shadow 0.3s;
   width: 12rem;
@@ -64,8 +67,8 @@ const CategoryItem = styled.a`
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
+    box-shadow: 0 2px 4px ${({ theme }) => theme.colors.boxShadow};
+  } 
   img {
     height: auto;
     margin-bottom: 1rem;
@@ -123,7 +126,8 @@ export const CategoryBanner = () =>
         {categories.length > 0 ? (
           categories.map(category => (
             <CategoryItem key={category} href={`/category/${category}`}>
-              <img src={categoryImages[category] || unknownCategory} alt={category} />
+              {categoryImages[category]?.({ width: "64px", height: "64px" }) || <UnknownCategory width="64px" height="64px" />}
+
               <p>{capitalize(category)}</p>
             </CategoryItem>
           ))

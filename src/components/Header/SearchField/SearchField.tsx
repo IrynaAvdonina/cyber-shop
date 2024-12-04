@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { useNavigate } from 'react-router-dom';
 
-import searchIcon from './../../../assets/search.svg';
+import SearchIcon from './../../../assets/search.svg?react';
 
 const SearchForm = styled.form`
-  .search-icon{
+  .search-icon {
       opacity: 0;
+      color: ${({ theme }) => theme.colors.textPrimary};
       display: none;
       padding: 0.875rem 1rem;
-      img {
-        width: 1.5rem;
-      }
     }
   @media (max-width: 768px) {
     order: 4;
@@ -38,12 +36,14 @@ const SearchInput = styled.input`
   min-width: 20vw;
   padding: 0.625rem;
   font-size: 0.875rem;
-  border: 2px solid #ccc;
+  background-color: ${({ theme }) => theme.colors.backgroundSecondary};
+  color:  ${({ theme }) => theme.colors.textPrimary};
+  border: 2px solid ${({ theme }) => theme.colors.border};
   border-radius: 10px;
   margin-right: 1.25rem;
   &:focus {
-    border-color: #8685EF;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border-color:  ${({ theme }) => theme.colors.accentPrimary};
+    box-shadow: 0 0 5px ${({ theme }) => theme.colors.accentPrimary};
     outline: none;
   }
   @media (max-width: 768px) {
@@ -62,9 +62,10 @@ const SearchButton = styled.button`
   border: none;
   font-size: 0.9rem;
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: ${({ theme }) => theme.colors.buttonBackground};
   &:hover {
-    background-color: #F2ECFF;
-    box-shadow: 0 0 5px #727272;
+    background-color: ${({ theme }) => theme.colors.buttonHover};
+    box-shadow: 0 0 5px ${({ theme }) => theme.colors.boxShadow};
   }
   @media (max-width: 480px) {
     padding: 0.5rem 0.75rem;
@@ -98,7 +99,7 @@ export const SearchField = () =>
 
     <SearchForm onSubmit={handleSubmit}>
       <button className="search-icon" type="button" onClick={handleClick}>
-        <img src={searchIcon} alt="Search Icon" />
+        <SearchIcon width="32px" height="32px" />
       </button>
       <SearchInputContainer showInput={showInput}>
         <SearchInput

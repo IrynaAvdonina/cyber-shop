@@ -10,8 +10,8 @@ const ProductCardContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  border: 1px solid  ${({ theme }) => theme.colors.border};
+  transition: all 0.2s ease-out;
   border-radius: 8px;
   align-items: center;
   text-align: center;
@@ -19,7 +19,7 @@ const ProductCardContainer = styled.div`
 
   .product-card-name {
     text-decoration: none;
-    color: black;
+    color: ${({ theme }) => theme.colors.textPrimary};
   }
   .img-container {
     width: 80%;
@@ -29,7 +29,7 @@ const ProductCardContainer = styled.div`
     object-fit: contain;
     height: 100%;
   }
-  button{
+  button {
     padding: 0.5rem;
     margin-bottom: 1rem;
     font-size: 0.9rem;
@@ -39,7 +39,8 @@ const ProductCardContainer = styled.div`
     }
   }
   &:hover {
-    border: 1px #f3f3f3 solid;
+    border: 1px  ${({ theme }) => theme.colors.borderSecondary} solid;
+    transform: translateY(-0.25em);
     }
 `;
 
