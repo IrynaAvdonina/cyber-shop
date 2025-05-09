@@ -168,7 +168,7 @@ export const CategoryPage = () =>
         </CategoriesFilter>
         <CategoriedProducts>
           {selectedCategory && <h3>{capitalize(selectedCategory)}</h3>}
-          <ProductCardList products={products} />
+          {products.length !== 0 ? <ProductCardList products={products} /> : <h3>Товарів не знайдено</h3>}
         </CategoriedProducts>
       </CategoriesContent>
     </>

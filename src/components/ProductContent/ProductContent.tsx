@@ -14,7 +14,7 @@ const ProductContentContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  gap: 5rem;
+  gap: 6rem;
   padding-bottom: 5rem;
   .img-container {
     flex: 2;
@@ -28,6 +28,12 @@ const ProductContentContainer = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     padding: 1.2rem 1.5rem;
+  }
+  @media (max-width: 480px) {
+    gap: 1rem;
+    .img-container {
+    max-width: 60%;
+  }
   }
 `;
 const SliderWrapper = styled.div`
@@ -45,10 +51,20 @@ const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  .product-top-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+  }
+
   a {
     color:  ${({ theme }) => theme.colors.accentSecondary};
     font-size: 1.1rem;
     text-decoration: none;
+    display: inline;
     transition: all 0.5s ease-in-out;
 
     &:hover {
@@ -63,7 +79,7 @@ const ProductInfo = styled.div`
   h2 {
     font-size: 2rem;
     color: ${({ theme }) => theme.colors.textPrimary};
-    text-align:center;
+    text-align: center;
   }
 
   .product-price {
@@ -76,7 +92,12 @@ const ProductInfo = styled.div`
     width: 90%;
     text-align: center;
   }
-
+  .product-extra-info {
+    width: 70%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
   p span {
     font-weight: 600;
     margin-right: 0.8rem;
@@ -105,14 +126,17 @@ const ProductInfo = styled.div`
     h2 {
       font-size: 1.4rem;
     }
-    .product-description{
+    .product-description, .product-extra-info {
       width: 100%;
     }
   }
 `;
+export function capitalize(string: string)
+{
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-
-export const ProductContent = ({ id, title, price, category, description, dimensions, stock, brand, weight, images, thumbnail }: TProduct) =>
+export const ProductContent = ({ id, title, price, category, description, rating, stock, availabilityStatus, shippingInformation, warrantyInformation, images, returnPolicy }: TProduct) =>
 {
   const settings = {
     dots: true,
@@ -137,45 +161,55 @@ export const ProductContent = ({ id, title, price, category, description, dimens
   }
 
   return (
-    <ProductContentContainer>
-      <div className="img-container">
-        {images.length > 1 ?
-          <SliderWrapper>
-            <Slider {...settings}>
-              {images.map((image, index) => (
-                <div key={index}>
-                  <img src={image} alt={title + ' ' + id} />
-                </div>
-              ))}
-            </Slider>
-          </SliderWrapper>
-          :
-          <div >
-            <img src={images[0]} alt={title + ' ' + id} />
-          </div>}
-      </div>
+    <>
+      <ProductContentContainer>
+        <div className="img-container">
+          {images.length > 1 ?
+            <SliderWrapper>
+              <Slider {...settings}>
+                {images.map((image, index) => (
+                  <div key={index}>
+                    <img src={image} alt={title + ' ' + id} />
+                  </div>
+                ))}
+              </Slider>
+            </SliderWrapper>
+            :
+            <div >
+              <img src={images[0]} alt={title + ' ' + id} />
+            </div>}
+        </div>
 
 
-      <ProductInfo>
-        <Link className='product-category' to={`/category/${category}`}>{category}</Link>
-        <h2 className='product-name'>{title}</h2>
-        {stock >= 0 ? <p className='product-price'>{price} грн.</p> : <p className='product-price'>Немає в наявності</p>}
-        <p className='product-description'>{description}</p>
-        <p className='product-dimensions'><span>Розміри: </span> {dimensions.height} × {dimensions.width} × {dimensions.depth}</p>
-        <p className='product-weight'><span>Вага: </span>{weight} г.</p>
-        <button onClick={handleClick} className="add-to-cart-button">Додати в кошик</button>
-        <ToastContainer
-          position="top-right"
-          autoClose={3000}
-          hideProgressBar={false}
-          newestOnTop={true}
-          closeOnClick
-          pauseOnFocusLoss
-          pauseOnHover
-          theme="colored"
-        />
-      </ProductInfo>
-    </ProductContentContainer >
+        <ProductInfo>
+          <div className="product-top-info">
+            <Link className='product-category' to={`/category/${category}`}>{capitalize(category)}</Link>
+            <p>{rating} ⭐</p>
+          </div>
+          <h2 className='product-name'>{title}</h2>
+          {stock >= 0 ? <p className='product-price'>{price} $</p> : <p className='product-price'>Немає в наявності</p>}
+          <p className='product-description'>{description}</p>
+          <div className='product-extra-info'>
+            <p><span>Наявність:</span> {availabilityStatus}</p>
+            <p><span>Доставка:</span> {shippingInformation}</p>
+            <p><span>Гарантія:</span> {warrantyInformation}</p>
+            <p><span>Повернення:</span> {returnPolicy}</p>
+          </div>
+
+          <button onClick={handleClick} className="add-to-cart-button">Додати в кошик</button>
+        </ProductInfo>
+      </ProductContentContainer >
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        pauseOnFocusLoss
+        pauseOnHover
+        theme="colored"
+      />
+    </>
   )
 }
 

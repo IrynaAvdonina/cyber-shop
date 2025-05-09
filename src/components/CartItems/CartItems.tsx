@@ -103,9 +103,9 @@ export const CartItem = ({ product, updateQuantity, removeItem }: TCartItemsProp
   {
     removeItem(product.id);
   }
-  let itemPrice = (product.price * productQuantity).toLocaleString("uk-UA", {
+  let itemPrice = (product.price * productQuantity).toLocaleString("en-US", {
     style: "currency",
-    currency: "UAH",
+    currency: "USD",
     minimumFractionDigits: 2,
   });
 

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import CartIcon from './../../../assets/cart.svg?react';
 import ChangeThemeIcon from './../../../assets/dark-theme-icon.svg?react';
-import { ThemeContext } from './../../../context/ThemeContext';
+import { useTheme } from './../../../context/ThemeContext';
 
 const HeaderIconsContainer = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ const HeaderIconsContainer = styled.div`
 
 export const HeaderIcons = () =>
 {
-  const { toggleTheme = () => { } } = useContext(ThemeContext) || {};
+  const { toggleTheme = () => { } } = useTheme() || {};
   const toggleThemeIcon = useRef<HTMLImageElement | null>(null);
 
   function toggleThemeHandler()

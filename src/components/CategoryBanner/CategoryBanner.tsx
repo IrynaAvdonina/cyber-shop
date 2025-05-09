@@ -8,6 +8,7 @@ import CategorySmWatches from '../../assets/category-smart-watches.svg?react';
 import CategoryTablets from '../../assets/category-tablets.svg?react';
 import UnknownCategory from '../../assets/unknown-category.svg?react';
 import { fetchCategories } from './../../apiService';
+import { Link } from 'react-router-dom';
 
 
 const categoryImages: Record<string, React.FunctionComponent<React.SVGProps<SVGSVGElement>>> = {
@@ -53,7 +54,7 @@ const CategoryList = styled.div`
   }
 `;
 
-const CategoryItem = styled.a`
+const CategoryItem = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -92,25 +93,19 @@ const CategoryItem = styled.a`
   }
 `;
 
-export function capitalize(string: string)
-{
+export function capitalize(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export const CategoryBanner = () =>
-{
+export const CategoryBanner = () => {
   const [categories, setCategories] = useState<string[] | []>([]);
 
-  useEffect(() =>
-  {
-    const fetchTopCategories = async () =>
-    {
-      try
-      {
+  useEffect(() => {
+    const fetchTopCategories = async () => {
+      try {
         const topCategories: string[] = await fetchCategories(5);
         setCategories(topCategories);
-      } catch (error)
-      {
+      } catch (error) {
         console.error('Error fetching categories:', error);
       }
     };
@@ -125,7 +120,7 @@ export const CategoryBanner = () =>
       <CategoryList>
         {categories.length > 0 ? (
           categories.map(category => (
-            <CategoryItem key={category} href={`/category/${category}`}>
+            <CategoryItem key={category} to={`/category/${category}`}>
               {categoryImages[category]?.({ width: "64px", height: "64px" }) || <UnknownCategory width="64px" height="64px" />}
 
               <p>{capitalize(category)}</p>

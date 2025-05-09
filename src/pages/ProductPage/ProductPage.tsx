@@ -41,10 +41,12 @@ export const ProductPage = () =>
           price={product.price}
           category={product.category}
           description={product.description}
-          dimensions={product.dimensions}
+          rating={product.rating}
           stock={product.stock}
-          brand={product.brand}
-          weight={product.weight}
+          availabilityStatus={product.availabilityStatus}
+          returnPolicy={product.returnPolicy}
+          shippingInformation={product.shippingInformation}
+          warrantyInformation={product.warrantyInformation}
           images={product.images}
         />
       )}

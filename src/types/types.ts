@@ -3,20 +3,18 @@ export type TProductCard = {
   title: string,
   price: number,
   stock: number,
-  category?: string,
+  category: string,
   thumbnail?: string,
   images: string[]
 }
 
 export type TProduct = TProductCard & {
   description: string,
-  dimensions: {
-    width: number,
-    height: number
-    depth: number
-  },
-  brand: string,
-  weight: number
+  rating: number,
+  availabilityStatus: string,
+  returnPolicy: string,
+  shippingInformation: string,
+  warrantyInformation: string
 }
 
 export type TProductCardProps =
@@ -41,8 +39,3 @@ export type TItemCart =
     productID: number,
     quantity: number
   }
-
-export type ThemeContextType = {
-  isDarkTheme: boolean;
-  toggleTheme: () => void;
-}

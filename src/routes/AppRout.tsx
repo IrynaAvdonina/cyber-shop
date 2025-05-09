@@ -21,7 +21,10 @@ export function AppRout()
         <Route path="*" element={<ErrorPage />} />
 
       </Route>
-    ))
+    ),
+    {
+      basename: "/cyber-shop",
+    })
 
   return (
     <RouterProvider router={router} />

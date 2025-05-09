@@ -146,9 +146,9 @@ export const ShoppingCart = () =>
     return total + (cartItem ? cartItem.quantity * item.price : 0);
   }, 0);
 
-  let localePrice = totalPrice.toLocaleString("uk-UA", {
+  let localePrice = totalPrice.toLocaleString("en-US", {
     style: "currency",
-    currency: "UAH",
+    currency: "USD",
     minimumFractionDigits: 2,
   });
 
